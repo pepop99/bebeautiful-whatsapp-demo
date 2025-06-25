@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeBeautiful WhatsApp Journey</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .phone-container {
+            max-width: 375px;
+            margin: 0 auto;
+            background: #000;
+            border-radius: 25px;
+            padding: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .chat-header {
+            background: #075e54;
+            color: white;
+            padding: 15px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .chat-info h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+        
+        .chat-info p {
+            margin: 0;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        .chat-body {
+            background: #e5ddd5;
+            height: 600px;
+            overflow-y: auto;
+            padding: 15px;
+            border-radius: 0 0 15px 15px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .message.bot {
+            align-items: flex-start;
+        }
+        
+        .message.user {
+            align-items: flex-end;
+        }
+        
+        .bubble {
+            max-width: 280px;
+            padding: 10px 15px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.4;
+            position: relative;
+        }
+        
+        .bubble.bot {
+            background: white;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .bubble.user {
+            background: #dcf8c6;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .timestamp {
+            font-size: 11px;
+            color: #999;
+            margin-top: 5px;
+        }
+        
+        .options {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 10px;
+            margin-top: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .option {
+            padding: 8px 12px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 13px;
+        }
+        
+        .option:hover {
+            background: #e9ecef;
+        }
+        
+        .option.selected {
+            background: #ff6b6b;
+            color: white;
+            border-color: #ff6b6b;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .product-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .product-features {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .buy-link {
+            background: #ff6b6b;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 12px;
+            display: inline-block;
+        }
+        
+        .emoji {
+            font-size: 16px;
+        }
+        
+        .typing {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-style: italic;
+            color: #666;
+        }
+        
+        .step-indicator {
+            background: #ff6b6b;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .header-info {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .header-info h1 {
+            margin: 0 0 10px 0;
+            font-size: 28px;
+        }
+
+        .header-info p {
+            margin: 0;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-info">
+        <h1>BeBeautiful WhatsApp Journey</h1>
+        <p>Interactive demo of HUL's conversational beauty platform</p>
+    </div>
+
+    <div class="phone-container">
+        <div class="chat-header">
+            <div class="profile-pic">Be</div>
+            <div class="chat-info">
+                <h3>BeBeautiful</h3>
+                <p>Your Go-to Beauty Guide</p>
+            </div>
+        </div>
+        
+        <div class="chat-body">
+            <!-- Welcome Message -->
+            <div class="message bot">
+                <div class="bubble bot">
+                    Hey there, gorgeous! <span class="emoji">🌸</span><br>
+                    Welcome to <strong>BeBeautiful</strong>, your trusted voice of beauty! <span class="emoji">💄</span><br><br>
+                    Be Your Own Kind of Beautiful – we're here to create a personalized experience for you!
+                </div>
+                <div class="timestamp">5:34 PM</div>
+            </div>
+            
+            <!-- Options Menu -->
+            <div class="message bot">
+                <div class="bubble bot">
+                    <span class="emoji">💫</span> How can we help you today?<br>
+                    We're here for all your beauty & wellness questions.
+                    <div class="options">
+                        <div class="option"><span class="emoji">☀️</span> Sunscreen for My Skin</div>
+                        <div class="option"><span class="emoji">👩‍⚕️</span> Dermat Recommendation</div>
+                        <div class="option"><span class="emoji">🧘‍♀️</span> Wellness Routine</div>
+                        <div class="option"><span class="emoji">💋</span> Makeup Trends</div>
+                    </div>
+                </div>
+                <div class="timestamp">5:34 PM</div>
+            </div>
+            
+            <!-- User Selection -->
+            <div class="message user">
+                <div class="bubble user">
+                    <span class="emoji">☀️</span> Sunscreen for My Skin
+                </div>
+                <div class="timestamp">5:35 PM</div>
+            </div>
+            
+            <!-- Bot Response -->
+            <div class="message bot">
+                <div class="bubble bot">
+                    Great choice! <span class="emoji">☀️</span> Sunscreen is a must – even on cloudy days.<br><br>
+                    Read why skipping sunscreen is a big no-no: <span class="emoji">👉</span> <a href="#" style="color: #075e54;">Why You Need Sunscreen Even on Cloudy Days</a><br><br>
+                    Now, let's find your perfect sunscreen match in 2 easy steps!
+                </div>
+                <div class="timestamp">5:35 PM</div>
+            </div>
+            
+            <!-- Step 1 -->
+            <div class="message bot">
+                <div class="bubble bot">
+                    <div class="step-indicator">Step 1</div>
+                    <strong>What's your skin type?</strong>
+                    <div class="options">
+                        <div class="option selected">Oily skin</div>
+                        <div class="option">Dry skin</div>
+                        <div class="option">Combination skin</div>
+                        <div class="option">Normal skin</div>
+                        <div class="option">Sensitive skin</div>
+                    </div>
+                </div>
+                <div class="timestamp">5:35 PM</div>
+            </div>
+            
+            <!-- Bot Education -->
+            <div class="message bot">
+                <div class="bubble bot">
+                    We got you! Here's your guide to the best sunscreens for oily skin:<br><br>
+                    <span class="emoji">🌟</span> <strong>Best Sunscreens for Oily Skin</strong><br>
+                    <a href="#" style="color: #075e54;">Your complete guide to oil-free, non-comedogenic options</a><br><br>
+                    We would love to better personalize our recommendations for you! And would love to know a little bit more -
+                </div>
+                <div class="timestamp">5:35 PM</div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="message bot">
+                <div class="bubble bot">
+                    <div class="step-indicator">Step 2</div>
+                    <strong>Where do you spend most of your time?</strong>
+                    <div class="options">
+                        <div class="option">Mostly Indoors</div>
+                        <div class="option selected">Outdoors a Lot</div>
+                        <div class="option">Mix of Both</div>
+                    </div>
+                </div>
+                <div class="timestamp">5:35 PM</div>
+            </div>
+            
+            <!-- Personalized Recommendations -->
+            <div class="message bot">
+                <div class="bubble bot">
+                    Thanks! Here's your sunscreen match <span class="emoji">👍</span><br><br>
+                    <strong>SPF 50+ Gel or Light Sunscreen</strong><br><br>
+                    <span class="emoji">✅</span> Great for oily/acne-prone skin<br>
+                    <span class="emoji">✅</span> Broad-spectrum UVA/UVB<br>
+                    <span class="emoji">✅</span> Reapply every 2 hours if outdoors
+                    
+                    <div class="product-card">
+                        <div class="product-name"><span class="emoji">☀️</span> Pond's Sun Miracle SPF 50 PA++ Sunscreen Serum</div>
+                        <div class="product-features">Lightweight, non-greasy formula perfect for oily skin</div>
+                        <a href="#" class="buy-link">Buy Now</a>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-name"><span class="emoji">☀️</span> Lakmé Sun Expert Invisible Sunstick SPF 50</div>
+                        <div class="product-features">Invisible finish, easy application on-the-go</div>
+                        <a href="#" class="buy-link">Buy Now</a>
+                    </div>
+                </div>
+                <div class="timestamp">5:36 PM</div>
+            </div>
+            
+            <!-- Engagement Options -->
+            <div class="message bot">
+                <div class="bubble bot">
+                    Would you like regular beauty updates from us? <span class="emoji">💅</span>
+                    <div class="options">
+                        <div class="option"><span class="emoji">🔄</span> Remind Me Daily</div>
+                        <div class="option selected"><span class="emoji">📅</span> Weekly Tips</div>
+                        <div class="option"><span class="emoji">❌</span> No Thanks</div>
+                    </div>
+                </div>
+                <div class="timestamp">5:36 PM</div>
+            </div>
+            
+            <!-- Confirmation -->
+            <div class="message bot">
+                <div class="bubble bot">
+                    Perfect! <span class="emoji">💕</span> You'll now receive curated weekly tips on skincare, wellness, and trends.<br><br>
+                    <span class="emoji">✨</span> <strong>Coming up this week:</strong><br>
+                    • Summer skincare essentials<br>
+                    • 5-minute morning routines<br>
+                    • Latest K-beauty trends
+                </div>
+                <div class="timestamp">5:36 PM</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Add some interactive behavior
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from siblings
+                this.parentNode.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                // Add selected class to clicked option
+                this.classList.add('selected');
+            });
+        });
+    </script>
+</body>
+</html>
