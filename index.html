@@ -789,33 +789,27 @@ async function selectSkinType(skinType) {
 
 function showCombinationSkincare() {
     addMessage("Combination skin means your T-zone (forehead, nose, chin) gets oily while your cheeks feel normal or a bit dry. Achieving balanced skin is the key for you.🤗<br><br>");
-    addMessage("<strong>A light gel suits the T-zone</strong> so it doesn't look shiny, and a gel-cream suits the cheeks so they stay comfortable.<br><br>", false, "sunscreen/combination/Combination Skin_Step 1.png");
-    addMessage("<strong>Time to find a sunscreen your skin will love! Hot Takes by BeBeautiful recommends three sunscreens for your skin type:</strong>", false);
+    addMessage("<strong>A light gel suits the T-zone</strong> so it doesn't look shiny, and a gel-cream suits the cheeks so they stay comfortable.<br><br>", false);
+    addMessage("<strong>Time to find a sunscreen your skin will love! Hot Takes by BeBeautiful recommends three sunscreens for your skin type:</strong>", false, "sunscreen/combination/Combination_Step.jpg");
 
     addMessage(
         `<button class="chat-button" onclick="selectProduct('pond-spf55')">
             <span><span class="emoji">🧴</span>POND'S Sun Miracle SPF 55 PA+++</span>
             <span>›</span>
         </button>`,
-        false,
-        "sunscreen/combination/Combination Skin_Pond's Sun Miracle.png"
-    );
+        false);
     addMessage(
         `<button class="chat-button" onclick="selectProduct('lakme-gel')">
             <span><span class="emoji">🧴</span>Lakme Sun Expert Gel Sunscreen</span>
             <span>›</span>
         </button>`,
-        false,
-        "sunscreen/combination/Combination Skin_Lakme Gel.png"
-    );
+        false);
     addMessage(
         `<button class="chat-button" onclick="selectProduct('lakme-hyaluronic')">
             <span><span class="emoji">🧴</span>Lakme 5% Hyaluronic Sun Gel</span>
             <span>›</span>
         </button>`,
-        false,
-        "sunscreen/combination/Combination Skin_Hyaluronic.png"
-    );
+        false);
 }
 
 function showNormalSkincare() {
