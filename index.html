@@ -505,33 +505,50 @@
         }
 
         function startMakeupJourney() {
-            const makeupIntro = `
-                Hey Beautiful! Let's get your makeup spot-on. I'll simplify the glam for you in minutes. ✨<br><br>
-                <strong>Pick your vibe:</strong>
-                <div class="message-buttons">
-                    <button class="chat-button" onclick="selectMakeupVibe('festive')">
-                        <span><span class="emoji">🎉</span>Festive Glam</span>
-                        <span>›</span>
-                    </button>
-                    <button class="chat-button" onclick="selectMakeupVibe('boss')">
-                        <span><span class="emoji">👩‍💼</span>Boss Lady</span>
-                        <span>›</span>
-                    </button>
-                    <button class="chat-button" onclick="selectMakeupVibe('peachy')">
-                        <span><span class="emoji">🍑</span>Peachy & Romantic</span>
-                        <span>›</span>
-                    </button>
-                    <button class="chat-button" onclick="selectMakeupVibe('dewy')">
-                        <span><span class="emoji">✨</span>Dewy & Glazed</span>
-                        <span>›</span>
-                    </button>
-                    <button class="chat-button" onclick="selectMakeupVibe('edgy')">
-                        <span><span class="emoji">🔥</span>Snatched & Edgy</span>
-                        <span>›</span>
-                    </button>
-                </div>
-            `;
-            addMessage(makeupIntro);
+            addMessage("Hey Beautiful! Let's get your makeup spot-on. I'll simplify the glam for you in minutes. ✨<br><br>");
+            addMessage("<strong>Pick your vibe:</strong>");
+
+            // Each button as a separate message, with optional imageUrl (add your image path if needed)
+            addMessage(
+                `<button class="chat-button" onclick="selectMakeupVibe('festive')">
+                    <span><span class="emoji">🎉</span>Festive Glam</span>
+                    <span>›</span>
+                </button>`,
+                false,
+                null // Example: "images/festive.png"
+            );
+            addMessage(
+                `<button class="chat-button" onclick="selectMakeupVibe('boss')">
+                    <span><span class="emoji">👩‍💼</span>Boss Lady</span>
+                    <span>›</span>
+                </button>`,
+                false,
+                "makeuphacks/bossLady/Boss Lady_Primary.jpg"
+            );
+            addMessage(
+                `<button class="chat-button" onclick="selectMakeupVibe('peachy')">
+                    <span><span class="emoji">🍑</span>Peachy & Romantic</span>
+                    <span>›</span>
+                </button>`,
+                false,
+                null // Example: "images/peachy.png"
+            );
+            addMessage(
+                `<button class="chat-button" onclick="selectMakeupVibe('dewy')">
+                    <span><span class="emoji">✨</span>Dewy & Glazed</span>
+                    <span>›</span>
+                </button>`,
+                false,
+                null // Example: "images/dewy.png"
+            );
+            addMessage(
+                `<button class="chat-button" onclick="selectMakeupVibe('edgy')">
+                    <span><span class="emoji">🔥</span>Snatched & Edgy</span>
+                    <span>›</span>
+                </button>`,
+                false,
+                null // Example: "images/edgy.png"
+            );
         }
 
         async function selectMakeupVibe(vibe) {
