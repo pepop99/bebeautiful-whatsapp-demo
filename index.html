@@ -692,7 +692,7 @@ function showDewyTips() {
 function showEdgyTips() {
     addMessage("Get ready to step into your main character energy and serve fierce eye drama all night.😸<br><br>");
     addMessage("<strong>Define the inner corners with a bold liquid eyeliner</strong> and sketch the wing for drama and depth.<br><br>", false, "makeuphacks/snatched/Snatched & Edgy_Step 1.jpg");
-    addMessage("<strong>Lift up with a lash volumizer mascara</strong> to make your eyes pop in the best way possible.<br><br>", false, "makeuphacks/snatched/Snatched & Edgy_Step 2.png");
+    addMessage("<strong>Lift up with a lash volumizer mascara</strong> to make your eyes pop in the best way possible.<br><br>", false, "makeuphacks/snatched/Snatched & Edgy_Step 2.jpg");
     addMessage(`<strong>Here are BeBe picks curated for you:</strong><br>
         <a href="https://www.nykaa.com/lakme-wink-and-win-combo-slash-save-hp2021/p/1356733" class="product-link" target="_blank">👁️ Lakme Eyeconic Combo</a><br>
         <a href="https://www.nykaa.com/elle-18-dreamy-eye-combo/p/13163840" class="product-link" target="_blank">👁️ Elle18 Dreamy Eye Combo</a><br><br>
@@ -716,34 +716,48 @@ function showEdgyTips() {
 }
 
 function startSunscreenJourney() {
-    const sunscreenIntro = `
-        We've learnt that the right sunscreen isn't hard to find, most of us are just looking at the wrong place. Let's find one that works for you 🌟<br><br>
-        <strong>Tell me your skin type and I'll match textures that feel good and protect:</strong>
-        
-        <div class="message-buttons">
-            <button class="chat-button" onclick="selectSkinType('combination')">
-                <span><span class="emoji">🌓</span>Combination</span>
-                <span>›</span>
-            </button>
-            <button class="chat-button" onclick="selectSkinType('normal')">
-                <span><span class="emoji">😊</span>Normal</span>
-                <span>›</span>
-            </button>
-            <button class="chat-button" onclick="selectSkinType('dry')">
-                <span><span class="emoji">🏜️</span>Dry</span>
-                <span>›</span>
-            </button>
-            <button class="chat-button" onclick="selectSkinType('oily')">
-                <span><span class="emoji">💧</span>Oily</span>
-                <span>›</span>
-            </button>
-        </div>
-        
+    addMessage("We've learnt that the right sunscreen isn't hard to find, most of us are just looking at the wrong place. Let's find one that works for you 🌟<br><br>");
+    addMessage("<strong>Tell me your skin type and I'll match textures that feel good and protect:</strong>");
+
+    // Each button as a separate message, with optional imageUrl (add your image path if needed)
+    addMessage(
+        `<button class="chat-button" onclick="selectSkinType('combination')">
+            <span><span class="emoji">🌓</span>Combination</span>
+            <span>›</span>
+        </button>`,
+        false,
+        "sunscreen/combination/Combination Skin_Primary.png" // Example: "images/combination.png"
+    );
+    addMessage(
+        `<button class="chat-button" onclick="selectSkinType('normal')">
+            <span><span class="emoji">😊</span>Normal</span>
+            <span>›</span>
+        </button>`,
+        false,
+        "sunscreen/normal/Normal_Primary.png" // Example: "images/normal.png"
+    );
+    addMessage(
+        `<button class="chat-button" onclick="selectSkinType('dry')">
+            <span><span class="emoji">🏜️</span>Dry</span>
+            <span>›</span>
+        </button>`,
+        false,
+        "sunscreen/dry/Dry_Primary.png" // Example: "images/dry.png"
+    );
+    addMessage(
+        `<button class="chat-button" onclick="selectSkinType('oily')">
+            <span><span class="emoji">💧</span>Oily</span>
+            <span>›</span>
+        </button>`,
+        false,
+        "sunscreen/oily/Oily_Primary.png" // Example: "images/oily.png"
+    );
+
+    addMessage(`
         <div class="privacy-notice">
             For your reference, you can review <a href="https://www.hul.co.in/brands/" target="_blank">Unilever trusted brands</a> and <a href="https://www.unilevernotices.com/privacy-notices/india-english.html" target="_blank">Privacy notice</a> to learn more about how we handle your data and ensure your privacy.
         </div>
-    `;
-    addMessage(sunscreenIntro);
+    `);
 }
 
 async function selectSkinType(skinType) {
@@ -774,27 +788,34 @@ async function selectSkinType(skinType) {
 }
 
 function showCombinationSkincare() {
-    const advice = `
-        Combination skin means your T-zone (forehead, nose, chin) gets oily while your cheeks feel normal or a bit dry. Achieving balanced skin is the key for you.🤗<br><br>
-        <strong>A light gel suits the T-zone</strong> so it doesn't look shiny, and a gel-cream suits the cheeks so they stay comfortable.<br><br>
-        <strong>Time to find a sunscreen your skin will love! Hot Takes by BeBeautiful recommends three sunscreens for your skin type:</strong>
-        
-        <div class="message-buttons">
-            <button class="chat-button" onclick="selectProduct('pond-spf55')">
-                <span><span class="emoji">🧴</span>POND'S Sun Miracle SPF 55 PA+++</span>
-                <span>›</span>
-            </button>
-            <button class="chat-button" onclick="selectProduct('lakme-gel')">
-                <span><span class="emoji">🧴</span>Lakme Sun Expert Gel Sunscreen</span>
-                <span>›</span>
-            </button>
-            <button class="chat-button" onclick="selectProduct('lakme-hyaluronic')">
-                <span><span class="emoji">🧴</span>Lakme 5% Hyaluronic Sun Gel</span>
-                <span>›</span>
-            </button>
-        </div>
-    `;
-    addMessage(advice);
+    addMessage("Combination skin means your T-zone (forehead, nose, chin) gets oily while your cheeks feel normal or a bit dry. Achieving balanced skin is the key for you.🤗<br><br>");
+    addMessage("<strong>A light gel suits the T-zone</strong> so it doesn't look shiny, and a gel-cream suits the cheeks so they stay comfortable.<br><br>", false, "sunscreen/combination/Combination Skin_Step 1.png");
+    addMessage("<strong>Time to find a sunscreen your skin will love! Hot Takes by BeBeautiful recommends three sunscreens for your skin type:</strong>", false);
+
+    addMessage(
+        `<button class="chat-button" onclick="selectProduct('pond-spf55')">
+            <span><span class="emoji">🧴</span>POND'S Sun Miracle SPF 55 PA+++</span>
+            <span>›</span>
+        </button>`,
+        false,
+        "sunscreen/combination/Combination Skin_Pond's Sun Miracle.png"
+    );
+    addMessage(
+        `<button class="chat-button" onclick="selectProduct('lakme-gel')">
+            <span><span class="emoji">🧴</span>Lakme Sun Expert Gel Sunscreen</span>
+            <span>›</span>
+        </button>`,
+        false,
+        "sunscreen/combination/Combination Skin_Lakme Gel.png"
+    );
+    addMessage(
+        `<button class="chat-button" onclick="selectProduct('lakme-hyaluronic')">
+            <span><span class="emoji">🧴</span>Lakme 5% Hyaluronic Sun Gel</span>
+            <span>›</span>
+        </button>`,
+        false,
+        "sunscreen/combination/Combination Skin_Hyaluronic.png"
+    );
 }
 
 function showNormalSkincare() {
@@ -921,19 +942,17 @@ async function selectProduct(productId) {
 async function learnApplication() {
     addMessage('💯 Yes, I\'d love to!', true);
     await showTyping();
-    
-    const applicationTips = `
-        Let's make sunscreen application easy with the exact amount, the right timing, and a makeup-safe reapply:<br><br>
-        
-        <strong>Step 1:</strong> After your moisturiser has sunk in, take two fingers' worth of sunscreen.<br><br>
-        <strong>Step 2:</strong> Apply it evenly over your face, ears, and neck.<br><br>
-        <strong>Step 3:</strong> Massage it gently until it looks even and no white patches remain.<br><br>
-        <strong>Step 4:</strong> If you're outdoors, reapply every 2–3 hours.<br><br>
-        <strong>Step 5:</strong> Wearing makeup? Use a sunstick so your base stays neat.<br><br>
-        
+
+    addMessage("Let's make sunscreen application easy with the exact amount, the right timing, and a makeup-safe reapply:<br><br>");
+    addMessage("<strong>Step 1:</strong> After your moisturiser has sunk in, take two fingers' worth of sunscreen.<br><br>", false, "sunscreen/sa/Step 1.jpg");
+    addMessage("<strong>Step 2:</strong> Apply it evenly over your face, ears, and neck.<br><br>", false, "sunscreen/sa/Step 2.jpg");
+    addMessage("<strong>Step 3:</strong> Massage it gently until it looks even and no white patches remain.<br><br>", false, "sunscreen/sa/Step 3.png");
+    addMessage("<strong>Step 4:</strong> If you're outdoors, reapply every 2–3 hours.<br><br>", false, "sunscreen/sa/Step 4.png");
+    addMessage("<strong>Step 5:</strong> Wearing makeup? Use a sunstick so your base stays neat.<br><br>", false, "sunscreen/sa/Step 5.png");
+
+    addMessage(`
         <a href="https://www.youtube.com/watch?v=spVC81shY4g" class="content-link" target="_blank">📱 Watch Dr. Anchal Pant's Expert Tips</a><br><br>
         <a href="https://www.bebeautiful.in/all-things-skin/everyday/how-to-apply-sunscreen-on-face" class="content-link" target="_blank">📖 Read Complete Guide</a>
-        
         <div class="message-buttons" style="margin-top: 15px;">
             <button class="chat-button" onclick="goToMainMenu()">
                 <span><span class="emoji">🔁</span>Main Menu</span>
@@ -944,8 +963,7 @@ async function learnApplication() {
                 <span>›</span>
             </button>
         </div>
-    `;
-    addMessage(applicationTips);
+    `);
 }
 
 function startRoutineJourney() {
