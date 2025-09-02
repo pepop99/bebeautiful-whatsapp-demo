@@ -789,8 +789,8 @@ async function selectSkinType(skinType) {
 
 function showCombinationSkincare() {
     addMessage("Combination skin means your T-zone (forehead, nose, chin) gets oily while your cheeks feel normal or a bit dry. Achieving balanced skin is the key for you.🤗<br><br>");
-    addMessage("<strong>A light gel suits the T-zone</strong> so it doesn't look shiny, and a gel-cream suits the cheeks so they stay comfortable.<br><br>", false);
-    addMessage("<strong>Time to find a sunscreen your skin will love! Hot Takes by BeBeautiful recommends three sunscreens for your skin type:</strong>", false, "sunscreen/combination/Combination Skin_Step 1.png");
+    addMessage("<strong>A light gel suits the T-zone</strong> so it doesn't look shiny, and a gel-cream suits the cheeks so they stay comfortable.<br><br>", false, "sunscreen/combination/Combination Skin_Step 1.png");
+    addMessage("<strong>Time to find a sunscreen your skin will love! Hot Takes by BeBeautiful recommends three sunscreens for your skin type:</strong>", false);
 
     addMessage(
         `<button class="chat-button" onclick="selectProduct('pond-spf55')">
@@ -819,97 +819,54 @@ function showCombinationSkincare() {
 }
 
 function showNormalSkincare() {
-    addMessage("Normal skin stays balanced most of the day. Keep it that way with broad-spectrum SPF 50 that feels light, sets fast, and sits clean under makeup.<br><br>");
-    addMessage("<strong>A light lotion for daily use or a tinted SPF works well;</strong> stick to non-comedogenic formulas so pores stay calm.<br><br>", false);
-    addMessage("<strong>Time to find a sunscreen your skin will love! Hot Takes by BeBeautiful recommends three sunscreens for your skin type:</strong>", false, "sunscreen/normal/Normal_Step.jpg");
-
-    addMessage(
-        `<button class="chat-button" onclick="selectProduct('pond-spf55')">
-            <span><span class="emoji">🧴</span>POND'S Sun Miracle SPF 55 PA+++</span>
-            <span>›</span>
-        </button>`,
-        false,
-        "sunscreen/normal/Normal_Pond's Sun Miracle.png"
-    );
-    addMessage(
-        `<button class="chat-button" onclick="selectProduct('lakme-priming')">
-            <span><span class="emoji">🧴</span>Lakmé Sun Expert Priming Dry Touch</span>
-            <span>›</span>
-        </button>`,
-        false,
-        "sunscreen/normal/Normal_Lakme Priming.png"
-    );
-    addMessage(
-        `<button class="chat-button" onclick="selectProduct('novology-tinted')">
-            <span><span class="emoji">🧴</span>Novology Tinted Sunscreen</span>
-            <span>›</span>
-        </button>`,
-        false,
-        "sunscreen/normal/Normal_Novology Tinted.png"
-    );
+    const advice = `
+        Normal skin stays balanced most of the day. Keep it that way with broad-spectrum SPF 50 that feels light, sets fast, and sits clean under makeup.<br><br>
+        <strong>A light lotion for daily use or a tinted SPF works well;</strong> stick to non-comedogenic formulas so pores stay calm.<br><br>
+        <strong>Time to find a sunscreen your skin will love! Hot Takes by BeBeautiful recommends three sunscreens for your skin type:</strong>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="selectProduct('pond-spf55')">
+                <span><span class="emoji">🧴</span>POND'S Sun Miracle SPF 55 PA+++</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectProduct('lakme-priming')">
+                <span><span class="emoji">🧴</span>Lakmé Sun Expert Priming Dry Touch</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectProduct('novology-tinted')">
+                <span><span class="emoji">🧴</span>Novology Tinted Sunscreen</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(advice);
 }
 
 function showDrySkincare() {
-    addMessage("Dry skin means your skin doesn't make enough natural oil which weakens the surface barrier. It becomes tight after cleansing, rough or flaky in places, and rarely shiny.<br><br>");
-    addMessage("<strong>You will need a broad-spectrum SPF 50 that feels silky,</strong> settles fast, and sits well under makeup. A rich-but-breathable formula that hydrates as it protects with skin barrier helpers like ceramides will work for you.<br><br>", false);
-    addMessage("<strong>Time to find a sunscreen your skin will love! Hot Takes by BeBeautiful recommends sunscreens for your skin type:</strong>", false, "sunscreen/dry/Dry_Step.jpg");
-
-    addMessage(
-        `<button class="chat-button" onclick="selectProduct('simple-hydrating')">
-            <span><span class="emoji">🧴</span>Simple Hydrating UV Fluid SPF 50</span>
-            <span>›</span>
-        </button>`,
-        false,
-        "sunscreen/dry/Dry_Simple Hydrating.png"
-    );
-    addMessage(
-        `<button class="chat-button" onclick="selectProduct('novology-hydrating')">
-            <span><span class="emoji">🧴</span>Novology Hydrating Sheer Sunscreen</span>
-            <span>›</span>
-        </button>`,
-        false,
-        "sunscreen/dry/Dry_Novology Hydrating.png"
-    );
-    addMessage(
-        `<button class="chat-button" onclick="selectProduct('lakme-hyaluronic')">
-            <span><span class="emoji">🧴</span>Lakmé 5% Hyaluronic Sun Gel</span>
-            <span>›</span>
-        </button>`,
-        false,
-        "sunscreen/dry/Dry_Lakme Hyaluronic.png"
-    );
+    const advice = `
+        Dry skin means your skin doesn't make enough natural oil which weakens the surface barrier. It becomes tight after cleansing, rough or flaky in places, and rarely shiny.<br><br>
+        <strong>You will need a broad-spectrum SPF 50 that feels silky,</strong> settles fast, and sits well under makeup. A rich-but-breathable formula that hydrates as it protects with skin barrier helpers like ceramides will work for you.<br><br>
+        <strong>Time to find a sunscreen your skin will love! Hot Takes by BeBeautiful recommends sunscreens for your skin type:</strong>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="selectProduct('simple-hydrating')">
+                <span><span class="emoji">🧴</span>Simple Hydrating UV Fluid SPF 50</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectProduct('novology-hydrating')">
+                <span><span class="emoji">🧴</span>Novology Hydrating Sheer Sunscreen</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectProduct('lakme-hyaluronic')">
+                <span><span class="emoji">🧴</span>Lakmé 5% Hyaluronic Sun Gel</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(advice);
 }
 
 function showOilySkincare() {
-    addMessage("Oily skin makes more natural oil (sebum), so the face looks shiny, especially on the forehead, nose, and chin. It may feel fresh right after cleansing but turns greasy again by midday.<br><br>");
-    addMessage("<strong>Choose water-light gels, gel-creams, or fluid lotions</strong> that set matte and light on skin. Skip heavy cream textures as they can feel greasy and make makeup move.<br><br>", false);
-    addMessage("<strong>Time to find a sunscreen your skin will love! Hot Takes by BeBeautiful recommends three sunscreens for your skin type:</strong>", false, "sunscreen/oily/Oily_Step.jpg");
-
-    addMessage(
-        `<button class="chat-button" onclick="selectProduct('simple-mattifying')">
-            <span><span class="emoji">🧴</span>Simple Mattifying UV Fluid SPF 50</span>
-            <span>›</span>
-        </button>`,
-        false,
-        "sunscreen/oily/Oily_Simple Mattifying.png"
-    );
-    addMessage(
-        `<button class="chat-button" onclick="selectProduct('novology-ultra-light')">
-            <span><span class="emoji">🧴</span>Novology Ultra Light Gel Sunscreen</span>
-            <span>›</span>
-        </button>`,
-        false,
-        "sunscreen/oily/Oily_Novology Ultra Light.png"
-    );
-    addMessage(
-        `<button class="chat-button" onclick="selectProduct('lakme-matte')">
-            <span><span class="emoji">🧴</span>Lakmé Dry Matte Fluid</span>
-            <span>›</span>
-        </button>`,
-        false,
-        "sunscreen/oily/Oily_Lakme Matte.png"
-    );
-}
     const advice = `
         Oily skin makes more natural oil (sebum), so the face looks shiny, especially on the forehead, nose, and chin. It may feel fresh right after cleansing but turns greasy again by midday.<br><br>
         <strong>Choose water-light gels, gel-creams, or fluid lotions</strong> that set matte and light on skin. Skip heavy cream textures as they can feel greasy and make makeup move.<br><br>
