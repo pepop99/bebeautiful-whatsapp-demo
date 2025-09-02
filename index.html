@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeBeautiful - Hot Takes Chatbot</title>
+    <title>BeBeautiful WhatsApp Demo | HUL Beauty & Personal Care</title>
     <style>
         * {
             margin: 0;
@@ -12,60 +12,97 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #0a0a0a;
+            overflow: hidden;
+            height: 100vh;
         }
 
-        .chat-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        .phone-container {
+            width: 375px;
+            height: 812px;
+            margin: 20px auto;
+            background: #000;
+            border-radius: 40px;
+            padding: 8px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        .screen {
             width: 100%;
-            max-width: 450px;
-            height: 700px;
-            display: flex;
-            flex-direction: column;
+            height: 100%;
+            background: #0b141a;
+            border-radius: 32px;
             overflow: hidden;
+            position: relative;
+        }
+
+        .status-bar {
+            height: 44px;
+            background: #075e54;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
         }
 
         .chat-header {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            height: 60px;
+            background: #075e54;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
             color: white;
-            padding: 20px;
-            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
         }
 
-        .chat-header h1 {
-            font-size: 20px;
-            margin-bottom: 5px;
+        .chat-header-left {
+            display: flex;
+            align-items: center;
+            flex: 1;
         }
 
-        .chat-header p {
-            font-size: 12px;
-            opacity: 0.9;
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        .chat-info h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .chat-info p {
+            font-size: 13px;
+            opacity: 0.8;
         }
 
         .chat-messages {
             flex: 1;
+            padding: 16px;
             overflow-y: auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="a" patternUnits="userSpaceOnUse" width="20" height="20"><circle cx="10" cy="10" r="1" fill="%23ffffff" opacity="0.02"/></pattern></defs><rect width="100" height="100" fill="url(%23a)"/></svg>');
+            background-color: #0b141a;
+            max-height: calc(100vh - 180px);
         }
 
         .message {
-            max-width: 85%;
-            padding: 12px 16px;
-            border-radius: 18px;
-            line-height: 1.4;
-            font-size: 14px;
+            margin-bottom: 12px;
             animation: slideIn 0.3s ease-out;
+            max-width: 85%;
         }
 
         @keyframes slideIn {
@@ -79,51 +116,130 @@
             }
         }
 
-        .bot-message {
-            background: #f8f9fa;
-            color: #333;
+        .message.bot {
             align-self: flex-start;
-            border: 1px solid #e9ecef;
         }
 
-        .user-message {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+        .message.user {
             align-self: flex-end;
+            margin-left: auto;
         }
 
-        .options-container {
+        .message-bubble {
+            padding: 8px 12px;
+            border-radius: 18px;
+            position: relative;
+            word-wrap: break-word;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .message.bot .message-bubble {
+            background: #1f2937;
+            color: #e5e7eb;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.user .message-bubble {
+            background: #25d366;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-time {
+            font-size: 11px;
+            opacity: 0.7;
+            margin-top: 4px;
+            text-align: right;
+        }
+
+        .message-buttons {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
-        .option-button {
-            background: white;
-            border: 2px solid #667eea;
-            color: #667eea;
+        .chat-button {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        .chat-button:active {
+            transform: translateY(0);
+        }
+
+        .emoji {
+            font-size: 16px;
+            margin-right: 8px;
+        }
+
+        .product-link {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            text-decoration: none;
             padding: 10px 15px;
             border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 5px 0;
             font-size: 13px;
-            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
 
-        .option-button:hover {
-            background: #667eea;
+        .product-link:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+        }
+
+        .content-link {
+            background: linear-gradient(135deg, #3742fa, #2f3542);
             color: white;
-            transform: translateY(-2px);
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 15px;
+            display: inline-block;
+            margin: 5px 0;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .privacy-notice {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+
+        .privacy-notice a {
+            color: #25d366;
+            text-decoration: none;
         }
 
         .typing-indicator {
             display: none;
-            align-self: flex-start;
-            background: #f8f9fa;
-            padding: 15px 20px;
+            padding: 12px 16px;
+            background: #1f2937;
             border-radius: 18px;
-            border: 1px solid #e9ecef;
+            border-bottom-left-radius: 4px;
+            margin-bottom: 12px;
+            max-width: 85%;
         }
 
         .typing-dots {
@@ -131,692 +247,1199 @@
             gap: 4px;
         }
 
-        .typing-dots span {
-            width: 8px;
-            height: 8px;
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: #9ca3af;
             border-radius: 50%;
-            background: #667eea;
-            animation: bounce 1.4s infinite ease-in-out;
+            animation: typing 1.4s infinite;
         }
 
-        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
-        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
 
-        @keyframes bounce {
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
             0%, 80%, 100% {
-                transform: scale(0);
-            } 40% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            40% {
                 transform: scale(1);
+                opacity: 1;
             }
         }
 
-        .product-link {
-            display: inline-block;
-            background: #ff6b6b;
+        .brand-header {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            padding: 20px;
+            text-align: center;
             color: white;
-            padding: 8px 15px;
-            border-radius: 15px;
-            text-decoration: none;
+        }
+
+        .brand-header h1 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .brand-header p {
             font-size: 12px;
-            margin-top: 8px;
-            transition: background 0.3s ease;
+            opacity: 0.9;
         }
 
-        .product-link:hover {
-            background: #ee5a24;
-        }
-
-        .content-link {
-            color: #667eea;
-            text-decoration: underline;
+        .quick-reply {
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px solid #25d366;
+            color: #25d366;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 2px;
+            display: inline-block;
         }
 
-        .emoji {
-            font-size: 16px;
-        }
-
-        .back-button {
-            background: #6c757d;
-            border-color: #6c757d;
+        .quick-reply:hover {
+            background: #25d366;
             color: white;
         }
 
-        .back-button:hover {
-            background: #5a6268;
-            border-color: #5a6268;
+        .message-content {
+            line-height: 1.5;
+        }
+
+        .message-content strong {
+            font-weight: 600;
+        }
+
+        .message-content br + br {
+            line-height: 0.5;
+        }
+
+        /* Scrollbar styling */
+        .chat-messages::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 2px;
+        }
+
+        @media (max-width: 430px) {
+            .phone-container {
+                width: 100%;
+                height: 100vh;
+                margin: 0;
+                border-radius: 0;
+                padding: 0;
+            }
+
+            .screen {
+                border-radius: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="chat-container">
-        <div class="chat-header">
-            <h1>🌟 BeBeautiful</h1>
-            <p>Your Go-to Beauty Insider • Hot Takes & Expert Tips</p>
-        </div>
-        
-        <div class="chat-messages" id="chatMessages">
-            <!-- Messages will be added here -->
-        </div>
-        
-        <div class="typing-indicator" id="typingIndicator">
-            <div class="typing-dots">
-                <span></span>
-                <span></span>
-                <span></span>
+    <div class="phone-container">
+        <div class="screen">
+            <div class="status-bar">
+                <div>9:41</div>
+                <div style="display: flex; gap: 4px;">
+                    <div>📶</div>
+                    <div>📶</div>
+                    <div>🔋</div>
+                </div>
+            </div>
+
+            <div class="brand-header">
+                <h1>🌟 BeBeautiful</h1>
+                <p>Your Go-to Beauty Guide • Expert Recommendations</p>
+            </div>
+
+            <div class="chat-header">
+                <div class="chat-header-left">
+                    <div class="profile-pic">BB</div>
+                    <div class="chat-info">
+                        <h3>BeBeautiful</h3>
+                        <p>Online • Beauty Expert</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+
+                <div class="message bot">
+                    <div class="message-bubble">
+                        <div class="message-content">
+                            <span class="emoji">✨</span> <strong>Hey, Welcome to BeBeautiful! Your go-to beauty insider.</strong><br><br>
+                            Need the right SPF, a beauty routine that works for you, or makeup hot takes? We've got you!<br><br>
+                            <strong>Where do you want to begin?</strong>
+                        </div>
+                        <div class="message-buttons">
+                            <button class="chat-button" onclick="selectOption('makeup')">
+                                <span><span class="emoji">💄</span>Makeup Hacks</span>
+                                <span>›</span>
+                            </button>
+                            <button class="chat-button" onclick="selectOption('sunscreen')">
+                                <span><span class="emoji">🌞</span>Sunscreen for my Skin</span>
+                                <span>›</span>
+                            </button>
+                            <button class="chat-button" onclick="selectOption('routine')">
+                                <span><span class="emoji">🧴</span>Personalized Beauty Routine</span>
+                                <span>›</span>
+                            </button>
+                            <button class="chat-button" onclick="selectOption('trends')">
+                                <span><span class="emoji">🔥</span>Verified Beauty Trends</span>
+                                <span>›</span>
+                            </button>
+                        </div>
+                        <div class="privacy-notice">
+                            For your reference, you can review <a href="https://www.hul.co.in/brands/" target="_blank">Unilever trusted brands</a> and <a href="https://www.unilevernotices.com/privacy-notices/india-english.html" target="_blank">Privacy notice</a> to learn more about how we handle your data and ensure your privacy.
+                        </div>
+                    </div>
+                    <div class="message-time">12:08 AM</div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        class BeBeautifulChatbot {
-            constructor() {
-                this.chatMessages = document.getElementById('chatMessages');
-                this.typingIndicator = document.getElementById('typingIndicator');
-                this.currentFlow = 'welcome';
-                this.userChoices = {};
-                this.init();
+        let conversationState = {
+            currentJourney: null,
+            skinType: null,
+            makeupVibe: null,
+            routineType: null
+        };
+
+        function showTyping(duration = 2000) {
+            const typing = document.getElementById('typingIndicator');
+            const messages = document.getElementById('chatMessages');
+            
+            typing.style.display = 'block';
+            messages.scrollTop = messages.scrollHeight;
+            
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    typing.style.display = 'none';
+                    resolve();
+                }, duration);
+            });
+        }
+
+        function addMessage(content, isUser = false, imageUrl = null) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-US', { 
+                hour: 'numeric', 
+                minute: '2-digit', 
+                hour12: true 
+            });
+
+            // If imageUrl is provided, add image before content
+            let imageHtml = '';
+            if (imageUrl) {
+                imageHtml = `<img src="${imageUrl}" alt="" style="width:200px;height:200px;vertical-align:middle;margin-right:8px;border-radius:4px;">`;
             }
 
-            init() {
-                this.showWelcomeMessage();
-            }
+            messageDiv.innerHTML = `
+                <div class="message-bubble">
+                    <div class="message-content">${content}${imageHtml}</div>
+                </div>
+                <div class="message-time">${timeStr}</div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
 
-            showTyping(duration = 1500) {
-                this.typingIndicator.style.display = 'block';
-                this.scrollToBottom();
-                return new Promise(resolve => {
-                    setTimeout(() => {
-                        this.typingIndicator.style.display = 'none';
-                        resolve();
-                    }, duration);
-                });
-            }
-
-            async addMessage(content, isBot = true, options = []) {
-                if (isBot) {
-                    await this.showTyping();
-                }
-
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `message ${isBot ? 'bot-message' : 'user-message'}`;
-                messageDiv.innerHTML = content;
-
-                if (options.length > 0 && isBot) {
-                    const optionsContainer = document.createElement('div');
-                    optionsContainer.className = 'options-container';
-                    
-                    options.forEach(option => {
-                        const button = document.createElement('button');
-                        button.className = `option-button ${option.isBack ? 'back-button' : ''}`;
-                        button.textContent = option.text;
-                        button.onclick = () => this.handleUserChoice(option);
-                        optionsContainer.appendChild(button);
-                    });
-                    
-                    messageDiv.appendChild(optionsContainer);
-                }
-
-                this.chatMessages.appendChild(messageDiv);
-                this.scrollToBottom();
-            }
-
-            scrollToBottom() {
-                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
-            }
-
-            async handleUserChoice(option) {
-                // Remove all option buttons
-                const optionButtons = document.querySelectorAll('.option-button');
-                optionButtons.forEach(btn => btn.remove());
-
-                // Add user message
-                await this.addMessage(option.text, false);
-
-                // Store user choice
-                if (option.key) {
-                    this.userChoices[option.key] = option.value || option.text;
-                }
-
-                // Handle the choice
-                if (option.action) {
-                    await this[option.action](option.value);
-                } else if (option.flow) {
-                    this.currentFlow = option.flow;
-                    await this[option.flow](option.value);
-                }
-            }
-
-            async showWelcomeMessage() {
-                await this.addMessage(
-                    `Hey, Hot Takes by BeBeautiful has entered the chat 🙋‍♀️`
-                );
-                
-                await this.addMessage(
-                    `Welcome to BeBeautiful - your go-to beauty insider.✨ Need the real deal on that trending ingredient? Want hot takes that cut through the hype? Looking for hacks that genuinely work? We've got you. BeBeautiful is where beauty expertise meets your real life—no fluff, just the insider knowledge you've been searching for.`
-                );
-
-                await this.showMainMenu();
-            }
-
-            async showMainMenu() {
-                await this.addMessage(
-                    `💬 Where should we begin? Pick a path to start.`,
-                    true,
-                    [
-                        { text: '🌞 Sunscreen for My Skin', flow: 'sunscreenFlow' },
-                        { text: '🧴 My Beauty Routine', flow: 'beautyRoutineFlow' },
-                        { text: '🔥 BeBe Verified Trends', flow: 'beautyTrendsFlow' },
-                        { text: '💄 Makeup Hacked! By BeBe', flow: 'makeupHacksFlow' }
-                    ]
-                );
-            }
-
-            async sunscreenFlow() {
-                await this.addMessage(
-                    `We've learnt that the right sunscreen isn't hard to find, most of us are just looking at the wrong place. Let's find one that works for you 🌟<br><br>For your reference, you can review <a href="https://www.hul.co.in/brands/" class="content-link">Unilever trusted brands</a> and <a href="https://www.unilevernotices.com/privacy-notices/india-english.html" class="content-link">Privacy notice</a> to learn more about how we handle your data and ensure your privacy.`
-                );
-
-                await this.addMessage(
-                    `I'll make sunscreen easy for you in a minute. Let's cut to the chase. Do you want me to:`,
-                    true,
-                    [
-                        { text: 'Find the right sunscreen for my skin type ☀️', flow: 'sunscreenSkinType' },
-                        { text: 'Learn proper sunscreen application and reapplication', flow: 'sunscreenApplication' }
-                    ]
-                );
-            }
-
-            async sunscreenSkinType() {
-                await this.addMessage(
-                    `Tell me your skin type and I'll match textures that feel good and protect.`,
-                    true,
-                    [
-                        { text: 'Combination', flow: 'sunscreenRecommendation', value: 'combination', key: 'skinType' },
-                        { text: 'Normal', flow: 'sunscreenRecommendation', value: 'normal', key: 'skinType' },
-                        { text: 'Dry', flow: 'sunscreenRecommendation', value: 'dry', key: 'skinType' },
-                        { text: 'Oily', flow: 'sunscreenRecommendation', value: 'oily', key: 'skinType' }
-                    ]
-                );
-            }
-
-            async sunscreenApplication() {
-                await this.addMessage(
-                    `Let's make sunscreen application easy with the exact amount, the right timing, and a makeup-safe reapply.<br><br>
-                    <strong>Step 1:</strong> After your moisturiser has sunk in, take three fingers' worth of sunscreen.<br>
-                    <strong>Step 2:</strong> Apply it evenly over your face, ears, and neck.<br>
-                    <strong>Step 3:</strong> Massage it gently until it looks even and no white patches remain.<br>
-                    <strong>Step 4:</strong> Wait 5 minutes so it sets before your next product or makeup.<br>
-                    <strong>Step 5:</strong> If you're outdoors, reapply every 2–3 hours.<br>
-                    <strong>Step 6:</strong> Wearing makeup? Blot first, then press on sunscreen (or use an SPF compact) so your base stays neat.`
-                );
-
-                await this.addMessage(
-                    `This is your holy grail for sunscreen! Our beauty expert and dermatologist, Dr. Anchal Pant shares her top tips:<br>
-                    <a href="https://www.youtube.com/watch?v=spVC81shY4g" class="content-link">🎥 Watch: Complete Sunscreen Guide</a>`
-                );
-
-                await this.showConclusionOptions();
-            }
-
-            async sunscreenRecommendation(skinType) {
-                const skinTypeData = {
-                    combination: {
-                        description: "Combination skin means your T-zone (forehead, nose, chin) gets oily while your cheeks feel normal or a bit dry. Achieving balanced skin is the key for you.",
-                        texture: "A light gel suits the T-zone so it doesn't look shiny, and a gel-cream suits the cheeks so they stay comfortable.",
-                        products: [
-                            { name: "🧴 Pond's Serum Boost Sunscreen (SPF 50/55)", value: "ponds_serum" },
-                            { name: "🧴 Lakmē Sunscreen Gel SPF 50 PA+++", value: "lakme_gel" },
-                            { name: "🧴 Simple Protecting Light Moisturizer SPF 15", value: "simple_light" }
-                        ]
-                    },
-                    normal: {
-                        description: "Normal skin stays balanced most of the day. Keep it that way with broad-spectrum SPF 50 that feels light, sets fast, and sits clean under makeup.",
-                        texture: "A light lotion for daily use or a tinted SPF works well; stick to non-comedogenic formulas so pores stay calm.",
-                        products: [
-                            { name: "🧴 Lakmé Sun Expert Tinted Sunscreen SPF 50 PA+++", value: "lakme_tinted" },
-                            { name: "🧴 Lakmé Sun Expert Ultra Matte SPF 40", value: "lakme_matte" },
-                            { name: "🧴 Simple Protecting Light Moisturizer SPF 15", value: "simple_light" }
-                        ]
-                    },
-                    dry: {
-                        description: "Dry skin means your skin doesn't make enough natural oil which weakens the surface barrier. It becomes tight after cleansing, rough or flaky in places, and rarely shiny.",
-                        texture: "You will need a broad-spectrum SPF 50 that feels silky, settles fast, and sits well under makeup. A rich-but-breathable formula that hydrates as it protects with skin barrier helpers like ceramides will work for you.",
-                        products: [
-                            { name: "🧴 Pond's Sun Miracle SPF 50 PA+++ Crème Gel", value: "ponds_miracle" },
-                            { name: "🧴 Lakmé Sun Expert SPF 50 PA+++ UV Sunscreen Lotion", value: "lakme_lotion" },
-                            { name: "🧴 Simple Kind to Skin Gel Sunscreen SPF 50 PA++++", value: "simple_gel" }
-                        ]
-                    },
-                    oily: {
-                        description: "Oily skin makes more natural oil (sebum), so the face looks shiny, especially on the forehead, nose, and chin. It may feel fresh right after cleansing but turns greasy again by midday.",
-                        texture: "Choose water-light gels, gel-creams, or fluid lotions that set matte and light on skin. Skip heavy cream textures as they can feel greasy and make makeup move.",
-                        products: [
-                            { name: "🧴 Lakmé 1% Hyaluronic Water-Light Sunscreen Gel SPF 50 PA++++", value: "lakme_hyaluronic" },
-                            { name: "🧴 Pond's Sun Miracle/Serum-Boost Sunscreen SPF 50", value: "ponds_miracle" },
-                            { name: "🧴 Simple Kind to Skin Gel Sunscreen SPF 50 PA++++", value: "simple_gel" }
-                        ]
-                    }
-                };
-
-                const data = skinTypeData[skinType];
-                
-                await this.addMessage(data.description);
-                await this.addMessage(data.texture);
-                
-                await this.addMessage(
-                    `Time to find a sunscreen your skin will love! Hot Takes by BeBeautiful recommends three sunscreens for your skin type:`,
-                    true,
-                    data.products.map(product => ({
-                        text: product.name,
-                        flow: 'showProductDetails',
-                        value: product.value,
-                        key: 'selectedProduct'
-                    }))
-                );
-
-                await this.addMessage(
-                    `Watch our BeBe expert creator show you how to choose your sunscreen by skin type:<br>
-                    <a href="https://www.youtube.com/shorts/tISbf8Q60_Y" class="content-link">🎥 Sunscreen Selection Guide</a>`
-                );
-            }
-
-            async showProductDetails(productValue) {
-                const productDetails = {
-                    ponds_serum: {
-                        description: "Your cheeks often need comfort, while the T-zone needs control. This formula cushions the cheeks so they don't feel tight, and it still feels light enough across the centre. The finish looks balanced and your makeup will sit smoothly.",
-                        link: "Add Pond's Serum Boost SPF to your routine!"
-                    },
-                    lakme_gel: {
-                        description: "This is a water-light gel that keeps the centre calm and doesn't make the sides feel tight. Your face feels balanced and stays comfortable through the day. It spreads easily, feels weightless, and sets to a soft-matte finish with no stickiness, no grey/white cast, and makeup grips well on top.",
-                        link: "Add Lakmē Sunscreen Gel SPF to your routine!"
-                    },
-                    simple_light: {
-                        description: "It's a lightweight, non-greasy day lotion with broad-spectrum SPF 15. It sinks in fast, smoothens the feel of your skin, and leaves a soft natural finish. On sunny days, don't forget to reapply every 2-3 hours.",
-                        link: "Add Simple Protecting Light Moisturizer SPF 15 to your routine!"
-                    }
-                };
-
-                const product = productDetails[productValue] || productDetails.ponds_serum;
-                
-                await this.addMessage(product.description);
-                await this.addMessage(
-                    `<a href="#" class="product-link">${product.link}</a>`
-                );
-
-                await this.showSunscreenConclusion();
-            }
-
-            async showSunscreenConclusion() {
-                await this.addMessage(
-                    `Hope that helped cut through the sunscreen confusion! ✨<br>
-                    BeBeautiful is your go-to for real beauty expertise - no fluff, just honest advice that works.<br>
-                    Got more questions? Hot Takes by BeBeautiful is your direct line to beauty expertise with zero hype.`,
-                    true,
-                    [
-                        { text: 'Learn proper sunscreen application', flow: 'sunscreenApplication' },
-                        { text: '🔁 Go back to Main Menu', flow: 'showMainMenu' },
-                        { text: '🙏 End Chat', flow: 'endChat' }
-                    ]
-                );
-            }
-
-            async makeupHacksFlow() {
-                await this.addMessage(
-                    `Hey Beautiful! Let's get your makeup spot-on. I'll simplify the glam for you in minutes.`
-                );
-
-                await this.addMessage(
-                    `Pick your vibe:`,
-                    true,
-                    [
-                        { text: 'Festive Glam', flow: 'makeupTips', value: 'festive' },
-                        { text: 'Boss Lady', flow: 'makeupTips', value: 'boss' },
-                        { text: 'Peachy & Romantic', flow: 'makeupTips', value: 'peachy' },
-                        { text: 'Dewy & Glazed', flow: 'makeupTips', value: 'dewy' },
-                        { text: 'Snatched & Edgy', flow: 'makeupTips', value: 'snatched' }
-                    ]
-                );
-            }
-
-            async makeupTips(vibe) {
-                const vibeData = {
-                    festive: {
-                        tips: `We're spilling the tea on glow that serves sparkle✨ and reads expensive.<br>
-                        🥰 Mix a drop of liquid highlighter into your foundation, tap a little on the high points of your face and neck.<br>
-                        😍 Sweep one warm eyeshadow onto your eyelids and blend with your finger and you're ready to turn heads in every room you walk into.`,
-                        products: `<strong>Here are BeBe picks curated for you:</strong><br>
-                        🧴 Liquid Highlighter - <a href="https://www.nykaa.com/lakme-lumi-strobe-cream-tint-highlighter-in-moisturizer-with-hyaluronic-acid-niacinamide-1/p/15985904" class="content-link">Lakme Lumi Strobe Cream</a><br>
-                        🧴 Eyeshadow Palette - <a href="https://www.nykaa.com/lakme-rouge-bloom-eyeshadow-pro-palette/p/17067517" class="content-link">Rouge Bloom</a>`,
-                        video: "https://www.instagram.com/p/DFvO3wIyRhY/?img_index=1"
-                    },
-                    boss: {
-                        tips: `This is a backstage beauty secret for our boss babes 👩🏽: keep the glam hydrating and light-weight.<br>
-                        🥰 Apply a thin layer of foundation with hyaluronic acid for a breathable and hydrating feel.<br>
-                        🥰 Tap concealer only where you need it, then set just the T-zone so your makeup looks cute and stays committed to you all day.`,
-                        products: `<strong>Here are BeBe picks curated for you:</strong><br>
-                        🧴 Foundation - <a href="https://www.nykaa.com/lakme-9-to-5-hya-matte-foundation-hyaluronic-acid/p/19156410" class="content-link">Lakme Hya Matte</a><br>
-                        🧴 Concealer - <a href="https://www.nykaa.com/lakme-9-to-5-hya-matte-liquid-concealer/p/19060832" class="content-link">Lakme Hya Matte Concealer</a>`,
-                        video: "https://www.instagram.com/p/DLCYRYxSPgO/?img_index=1"
-                    },
-                    peachy: {
-                        tips: `You're entering your soft girl era with your two besties - a dreamy blush and a peachy lipstick.<br>
-                        😊 Apply a soft blush on your cheekbones and across the bridge of the nose for that playful, golden hour glow.<br>
-                        👄 Swipe across a lipstick in peach or rose, then press a lip gloss in the centre for a naturally fuller, plump look.`,
-                        products: `<strong>Here are BeBe picks curated for you:</strong><br>
-                        🧴 Blush - <a href="https://www.nykaa.com/elle-18-blushbomb/p/13165225" class="content-link">Elle18 Blushbomb</a><br>
-                        🧴 Lipstick - <a href="https://www.nykaa.com/lakme-glitterati-glaze-lip-gloss/p/16962454" class="content-link">Lakme Lip Glaze</a>`,
-                        video: "https://www.instagram.com/p/DNaTuouyH3N/?img_index=1"
-                    },
-                    dewy: {
-                        tips: `You said 'I do' to a dewy look that deserves a spotlight and a spot on your gram.✨<br>
-                        🥰 Smoothen out your skin with a glowy primer and even out with a skin tint for that extra glow you deserve.<br>
-                        🥰 If you're running late, use that concealer smart: lift the outer eye, sharpen lip edges for a crisp cupid's bow, and tidy any wobbly liner in one swipe for drama that holds.`,
-                        products: `<strong>Here are BeBe picks curated for you:</strong><br>
-                        🧴 Primer - <a href="https://www.nykaa.com/lakme-makeup-skincare-vitamin-c-superglow-skin-perfecting-primer/p/15711586" class="content-link">Lakme Vit C Superglow</a><br>
-                        🧴 Tint - <a href="https://www.nykaa.com/lakme-vit-c-face-ivory-combo-tint-compact/p/16415794" class="content-link">Lakme Vit C Tint</a>`,
-                        video: "https://www.instagram.com/p/DCT9H-MKjRE/?img_index=1"
-                    },
-                    snatched: {
-                        tips: `Get ready to step into your main character energy and serve fierce eye drama all night.😸<br>
-                        💫 Define the inner corners with a bold liquid eyeliner and sketch the wing for drama and depth.<br>
-                        💫 Lift up with a lash volumizer mascara to make your eyes pop in the best way possible.`,
-                        products: `<strong>Here are BeBe picks curated for you:</strong><br>
-                        🧴 <a href="https://www.nykaa.com/lakme-wink-and-win-combo-slash-save-hp2021/p/1356733" class="content-link">Lakme Eyeconic Combo</a><br>
-                        🧴 <a href="https://www.nykaa.com/elle-18-dreamy-eye-combo/p/13163840" class="content-link">Elle18 Dreamy Eye Combo</a>`,
-                        video: "https://www.instagram.com/p/DKtyFb4yRSd/?img_index=7"
-                    }
-                };
-
-                const data = vibeData[vibe];
-                
-                await this.addMessage(data.tips);
-                await this.addMessage(data.products);
-                
-                await this.addMessage(
-                    `Hope that hits the spot. I'm here anytime for makeup and glam that works for you.<br><br>
-                    <a href="${data.video}" class="content-link">🎥 Watch the tutorial</a>`
-                );
-
-                await this.addMessage(
-                    `Hot Takes by BeBe keeps it simple with beauty insider tips and matched products in one place.`,
-                    true,
-                    [
-                        { text: 'Main Menu', flow: 'showMainMenu' },
-                        { text: 'Explore Beauty Routines', flow: 'beautyRoutineFlow' },
-                        { text: 'End Chat', flow: 'endChat' }
-                    ]
-                );
-            }
-
-            async beautyRoutineFlow() {
-                await this.addMessage(
-                    `Hi Beautiful! Let's make beauty effortless and precise for you.<br><br>
-                    I'll build a routine that fits your life with easy, effective steps that actually work.<br><br>
-                    For your reference, you can review <a href="https://www.hul.co.in/brands/" class="content-link">Unilever trusted brands</a> and <a href="https://www.unilevernotices.com/privacy-notices/india-english.html" class="content-link">Privacy notice</a> to learn more about how we handle your data and ensure your privacy.`
-                );
-
-                await this.addMessage(
-                    `Your Beauty Routine:`,
-                    true,
-                    [
-                        { text: 'Skincare Routine', flow: 'skincareRoutine' },
-                        { text: 'Haircare Routine', flow: 'haircareRoutine' },
-                        { text: 'Wellness Tips/Self-Care', flow: 'wellnessRoutine' }
-                    ]
-                );
-            }
-
-            async skincareRoutine() {
-                await this.addMessage(
-                    `Let us know your skin type.`,
-                    true,
-                    [
-                        { text: 'Combination Skin', flow: 'skincareTips', value: 'combination' },
-                        { text: 'Normal Skin', flow: 'skincareTips', value: 'normal' },
-                        { text: 'Dry Skin', flow: 'skincareTips', value: 'dry' },
-                        { text: 'Oily Skin', flow: 'skincareTips', value: 'oily' },
-                        { text: 'Confused? Learn about Skin Types', flow: 'skinTypeEducation' }
-                    ]
-                );
-            }
-
-            async skinTypeEducation() {
-                await this.addMessage(
-                    `No worries, here's how you can understand your skin type.<br><br>
-                    <strong>Combination</strong> - T-zone feels oily by midday while cheeks feel comfortable or even a bit dry.<br>
-                    <strong>Normal</strong> - Skin feels balanced and comfortable throughout the day—not too oily, not too tight.<br>
-                    <strong>Dry</strong> - Skin often feels tight, especially after cleansing, and craves that extra moisture boost.<br>
-                    <strong>Oily</strong> - Skin feels shiny and produces oil quickly, especially in your T-zone area.`,
-                    true,
-                    [
-                        { text: 'Combination Skin', flow: 'skincareTips', value: 'combination' },
-                        { text: 'Normal Skin', flow: 'skincareTips', value: 'normal' },
-                        { text: 'Dry Skin', flow: 'skincareTips', value: 'dry' },
-                        { text: 'Oily Skin', flow: 'skincareTips', value: 'oily' }
-                    ]
-                );
-            }
-
-            async skincareTips(skinType) {
-                await this.addMessage(
-                    `Let's build skincare that feels good on your skin and works well for you.<br><br>
-                    <strong>Step 1:</strong> Cleanse<br>
-                    <strong>Step 2:</strong> Moisturize<br>
-                    <strong>Step 3:</strong> Treat (Serum)<br>
-                    <strong>Step 4:</strong> Protect (Sunscreen)`
-                );
-
-                await this.addMessage(
-                    `Do you have any specific skin concern?`,
-                    true,
-                    [
-                        { text: 'Dull Skin', flow: 'showSkincareProducts', value: 'dull' },
-                        { text: 'Pigmentation & Dark Spots', flow: 'showSkincareProducts', value: 'pigmentation' },
-                        { text: 'Dry & Flaky Skin', flow: 'showSkincareProducts', value: 'dryflaky' },
-                        { text: 'Acne & Oil Control', flow: 'showSkincareProducts', value: 'acne' },
-                        { text: 'Wrinkles and Fine Lines', flow: 'showSkincareProducts', value: 'wrinkles' },
-                        { text: 'Tanning', flow: 'showSkincareProducts', value: 'tanning' },
-                        { text: 'Skip', flow: 'showSkincareProducts', value: 'none' }
-                    ]
-                );
-            }
-
-            async showSkincareProducts(concern) {
-                await this.addMessage(
-                    `<strong>BeBe Picks for You!</strong><br>
-                    🧴 Simple Kind to Skin Refreshing Face Wash<br>
-                    🧴 Pond's Super Light Gel<br>
-                    🧴 Lakmé Sun Expert Ultra Matte Gel SPF 50`
-                );
-
-                await this.showWeeklyTipsOption();
-            }
-
-            async haircareRoutine() {
-                await this.addMessage(
-                    `Perfect! Here's a quick guide to building a hair routine for smooth, sleek hair from our experts!<br><br>
-                    <a href="#" class="content-link">👉 Hair Care Guide</a><br><br>
-                    Please share your biggest hair need so that we can share a personalised haircare routine for you.`,
-                    true,
-                    [
-                        { text: 'Hairfall Rescue', flow: 'showHaircareProducts', value: 'hairfall' },
-                        { text: 'Damaged Hair Rescue', flow: 'showHaircareProducts', value: 'damaged' },
-                        { text: 'Hair Heat Protection', flow: 'showHaircareProducts', value: 'heat' },
-                        { text: 'Dry/Fizzy Hair Maintenance', flow: 'showHaircareProducts', value: 'dryfrizzy' },
-                        { text: 'Straight Hair', flow: 'showHaircareProducts', value: 'straight' },
-                        { text: 'Curly Hair Maintenance', flow: 'showHaircareProducts', value: 'curly' }
-                    ]
-                );
-            }
-
-            async showHaircareProducts(hairNeed) {
-                await this.addMessage(
-                    `Based on your hair need, here's your BeBe Edit - Haircare Routine<br><br>
-                    💇‍♀️ <strong>Haircare Routine</strong><br>
-                    🌬️ Protect your strands from humidity and dust.<br>
-                    🧖‍♀️ Oil once a week, and use a clarifying shampoo if you're outdoors often.<br><br>
-                    <a href="#" class="content-link">🎥 Watch: How to Oil Your Hair the Right Way</a>`
-                );
-
-                await this.addMessage(
-                    `<strong>BeBe Picks for You!</strong><br>
-                    🧴 Product 1<br>
-                    🧴 Product 2<br>
-                    🧴 Product 3`
-                );
-
-                await this.showWeeklyTipsOption();
-            }
-
-            async wellnessRoutine() {
-                await this.addMessage(
-                    `Perfect! Here's a busy girl's wellness and mindfulness guide<br><br>
-                    <a href="#" class="content-link">👉 Wellness Guide</a><br><br>
-                    Now, let's personalise your wellness routine! Please share your profession with us to help our experts tailor tips based on your lifestyle!`,
-                    true,
-                    [
-                        { text: 'Homemaker', flow: 'showWellnessTips', value: 'homemaker' },
-                        { text: 'Service Professional', flow: 'showWellnessTips', value: 'service' },
-                        { text: 'Self Employed', flow: 'showWellnessTips', value: 'selfemployed' },
-                        { text: 'Student', flow: 'showWellnessTips', value: 'student' }
-                    ]
-                );
-            }
-
-            async showWellnessTips(profession) {
-                await this.addMessage(
-                    `Based on your busy life and multi-tasking, here are some expert recommended wellness tips<br><br>
-                    🧘‍♀️ <strong>Wellness Tips</strong><br>
-                    💧 Hydration is your best beauty hack.<br>
-                    🌿 Add supplements that support skin & hair health.<br>
-                    🧘‍♀️ Try 5 minutes of breathwork before bed.<br><br>
-                    <a href="https://www.youtube.com/watch?v=juVn-NTJL08" class="content-link">🎥 Watch: Vasudha Rai talk about the importance of sleep</a>`
-                );
-
-                await this.addMessage(
-                    `<strong>BeBe Picks for You!</strong><br>
-                    🧴 Product 1<br>
-                    🧴 Product 2<br>
-                    🧴 Product 3`
-                );
-
-                await this.showWeeklyTipsOption();
-            }
-
-            async beautyTrendsFlow() {
-                await this.addMessage(
-                    `BeBe Verified is BeBeautiful's expert-led guide to decoding viral beauty trends. It helps users understand whether popular skincare and haircare routines work for them.<br><br>
-                    For your reference, you can review <a href="https://www.hul.co.in/brands/" class="content-link">Unilever trusted brands</a> and <a href="https://www.unilevernotices.com/privacy-notices/india-english.html" class="content-link">Privacy notice</a> to learn more about how we handle your data and ensure your privacy.`
-                );
-
-                await this.addMessage(
-                    `Which trend would you like us to decode for you today?`,
-                    true,
-                    [
-                        { text: 'Skin Trends', flow: 'skinTrends' },
-                        { text: 'Hair Trends', flow: 'hairTrends' },
-                        { text: 'Makeup Trends', flow: 'makeupTrends' }
-                    ]
-                );
-            }
-
-            async skinTrends() {
-                await this.addMessage(
-                    `Let's decode the latest skin trends for you! First, what is your skin type?`,
-                    true,
-                    [
-                        { text: 'Oily', flow: 'showTrendAdvice', value: 'oily' },
-                        { text: 'Normal', flow: 'showTrendAdvice', value: 'normal' },
-                        { text: 'Dry', flow: 'showTrendAdvice', value: 'dry' },
-                        { text: 'Combination', flow: 'showTrendAdvice', value: 'combination' }
-                    ]
-                );
-            }
-
-            async showTrendAdvice(skinType) {
-                await this.addMessage(
-                    `Here's the BeBe Verified take on skin cycling for your skin type:<br>
-                    ✅ Works well if done gently<br>
-                    🧴 Use mild exfoliants (like lactic acid)<br>
-                    🚫 Avoid strong retinoids—opt for bakuchiol or encapsulated retinol<br>
-                    💧 Prioritize barrier-repairing moisturizers on recovery nights<br><br>
-                    These tips are backed by science and approved by our dermat experts.<br><br>
-                    <a href="#" class="content-link">🎥 Watch: How to Skin Cycle Safely</a>`
-                );
-
-                await this.addMessage(
-                    `Here are your BeBe Favourites for ${skinType} skin & skin cycling:<br>
-                    🧴 Simple Soothing Facial Toner – Alcohol-free and calming<br>
-                    🧴 Minimalist 2% Lactic Acid – Gentle exfoliation<br> 
-                    🧴 Pond's Super Light Gel – Hydrating and non-comedogenic<br>
-                    🧴 Lakmé Hydra Pro Gel Crème – Deep hydration with pentavitin`
-                );
-
-                await this.showWeeklyTipsOption();
-            }
-
-            async hairTrends() {
-                await this.addMessage(`Hair trends coming soon! Stay tuned for expert-backed hair trend analysis.`);
-                await this.showConclusionOptions();
-            }
-
-            async makeupTrends() {
-                await this.addMessage(`Makeup trends coming soon! Get ready for the latest makeup trend breakdowns.`);
-                await this.showConclusionOptions();
-            }
-
-            async showWeeklyTipsOption() {
-                await this.addMessage(
-                    `Would you like regular beauty updates from us?`,
-                    true,
-                    [
-                        { text: 'Weekly Tips', flow: 'subscribeWeeklyTips' },
-                        { text: 'Back to Main Menu', flow: 'showMainMenu' }
-                    ]
-                );
-            }
-
-            async subscribeWeeklyTips() {
-                await this.addMessage(
-                    `Perfect! 💌 You'll now receive curated weekly tips on skincare, wellness, and trends.<br>
-                    Would you like to explore something else or end the chat?`,
-                    true,
-                    [
-                        { text: 'Main Menu', flow: 'showMainMenu' },
-                        { text: 'End Chat', flow: 'endChat' }
-                    ]
-                );
-            }
-
-            async showConclusionOptions() {
-                await this.addMessage(
-                    `Hot Takes by BeBeautiful keeps it simple with beauty insider tips and matched products in one place.`,
-                    true,
-                    [
-                        { text: 'Main Menu', flow: 'showMainMenu' },
-                        { text: 'Weekly Tips', flow: 'subscribeWeeklyTips' },
-                        { text: 'End Chat', flow: 'endChat' }
-                    ]
-                );
-            }
-
-            async endChat() {
-                await this.addMessage(
-                    `That's a wrap (for now)! 📲<br><br>
-                    Follow us on @BeBeautiful_India - we're giving away beauty products every month 🎁<br><br>
-                    💌 Type "Hi BeBeautiful" if you have any more questions!`,
-                    true,
-                    [
-                        { text: 'Start Over', flow: 'showWelcomeMessage' }
-                    ]
-                );
+        async function selectOption(option) {
+            conversationState.currentJourney = option;
+            
+            const optionNames = {
+                'makeup': '💄 Makeup Hacks',
+                'sunscreen': '🌞 Sunscreen for my Skin',
+                'routine': '🧴 Personalized Beauty Routine',
+                'trends': '🔥 Verified Beauty Trends'
+            };
+            
+            addMessage(optionNames[option], true);
+            
+            await showTyping();
+            
+            switch(option) {
+                case 'makeup':
+                    startMakeupJourney();
+                    break;
+                case 'sunscreen':
+                    startSunscreenJourney();
+                    break;
+                case 'routine':
+                    startRoutineJourney();
+                    break;
+                case 'trends':
+                    startTrendsJourney();
+                    break;
             }
         }
 
-        // Initialize the chatbot when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            new BeBeautifulChatbot();
+        function startMakeupJourney() {
+            const makeupIntro = `
+                Hey Beautiful! Let's get your makeup spot-on. I'll simplify the glam for you in minutes. ✨<br><br>
+                <strong>Pick your vibe:</strong>
+                <div class="message-buttons">
+                    <button class="chat-button" onclick="selectMakeupVibe('festive')">
+                        <span><span class="emoji">🎉</span>Festive Glam</span>
+                        <span>›</span>
+                    </button>
+                    <button class="chat-button" onclick="selectMakeupVibe('boss')">
+                        <span><span class="emoji">👩‍💼</span>Boss Lady</span>
+                        <span>›</span>
+                    </button>
+                    <button class="chat-button" onclick="selectMakeupVibe('peachy')">
+                        <span><span class="emoji">🍑</span>Peachy & Romantic</span>
+                        <span>›</span>
+                    </button>
+                    <button class="chat-button" onclick="selectMakeupVibe('dewy')">
+                        <span><span class="emoji">✨</span>Dewy & Glazed</span>
+                        <span>›</span>
+                    </button>
+                    <button class="chat-button" onclick="selectMakeupVibe('edgy')">
+                        <span><span class="emoji">🔥</span>Snatched & Edgy</span>
+                        <span>›</span>
+                    </button>
+                </div>
+            `;
+            addMessage(makeupIntro);
+        }
+
+        async function selectMakeupVibe(vibe) {
+            const vibeNames = {
+                'festive': '🎉 Festive Glam',
+                'boss': '👩‍💼 Boss Lady',
+                'peachy': '🍑 Peachy & Romantic',
+                'dewy': '✨ Dewy & Glazed',
+                'edgy': '🔥 Snatched & Edgy'
+            };
+            
+            addMessage(vibeNames[vibe], true);
+            await showTyping();
+            
+            switch(vibe) {
+                case 'festive':
+                    showFestiveTips();
+                    break;
+                case 'boss':
+                    showBossTips();
+                    break;
+                case 'peachy':
+                    showPeachyTips();
+                    break;
+                case 'dewy':
+                    showDewyTips();
+                    break;
+                case 'edgy':
+                    showEdgyTips();
+                    break;
+            }
+        }
+
+        function showFestiveTips() {
+            // Split each <strong> tip into separate messages
+            addMessage("We're spilling the tea on glow that serves sparkle✨ and reads expensive.<br><br>");
+            addMessage("🥰 <strong>Mix a drop of liquid highlighter into your foundation</strong>, tap a little on the high points of your face and neck.<br><br>", false, "");
+            addMessage("😍 <strong>Sweep one warm eyeshadow onto your eyelids</strong> and blend with your finger and you're ready to turn heads in every room you walk into.<br><br>");
+            addMessage(`<strong>Here are BeBe picks curated for you:</strong><br>
+        <a href="https://www.nykaa.com/lakme-lumi-strobe-cream-tint-highlighter-in-moisturizer-with-hyaluronic-acid-niacinamide-1/p/15985904" class="product-link" target="_blank">🧴 Lakme Lumi Strobe Cream</a><br>
+        <a href="https://www.nykaa.com/lakme-rouge-bloom-eyeshadow-pro-palette/p/17067517" class="product-link" target="_blank">🎨 Rouge Bloom Eyeshadow Palette</a><br><br>
+        You've got it right✔️ Hope that hits the spot. I'm here anytime for makeup and glam that works for you.<br><br>
+        <a href="https://www.instagram.com/p/DFvO3wIyRhY/?img_index=1" class="content-link" target="_blank">📱 Watch Expert Tutorial</a>
+        <div class="message-buttons" style="margin-top: 15px;">
+            <button class="chat-button" onclick="goToMainMenu()">
+                <span><span class="emoji">🔁</span>Main Menu</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="visitInstagram()">
+                <span><span class="emoji">📱</span>Visit Our Instagram</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="weeklyTips()">
+                <span><span class="emoji">💌</span>Weekly Tips</span>
+                <span>›</span>
+            </button>
+        </div>
+    `);
+}
+
+function showBossTips() {
+    addMessage("This is a backstage beauty secret for our boss babes 👩🏽: keep the glam hydrating and light-weight.<br><br>");
+    addMessage("🥰 <strong>Apply a thin layer of foundation with hyaluronic acid</strong> for a breathable and hydrating feel.<br><br>");
+    addMessage("🥰 <strong>Tap concealer only where you need it</strong>, then set just the T-zone so your makeup looks cute and stays committed to you all day.<br><br>");
+    addMessage(`<strong>Here are BeBe picks curated for you:</strong><br>
+        <a href="https://www.nykaa.com/lakme-9-to-5-hya-matte-foundation-hyaluronic-acid/p/19156410" class="product-link" target="_blank">🧴 Lakme Hya Matte Foundation</a><br>
+        <a href="https://www.nykaa.com/lakme-9-to-5-hya-matte-liquid-concealer/p/19060832" class="product-link" target="_blank">🧴 Lakme Hya Matte Concealer</a><br><br>
+        Lovely choice!✨ Hope that hits the spot.<br><br>
+        <a href="https://www.instagram.com/p/DLCYRYxSPgO/?img_index=1" class="content-link" target="_blank">📱 Watch 9-to-5 Base Tutorial</a>
+        <div class="message-buttons" style="margin-top: 15px;">
+            <button class="chat-button" onclick="goToMainMenu()">
+                <span><span class="emoji">🔁</span>Main Menu</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="visitInstagram()">
+                <span><span class="emoji">📱</span>Visit Our Instagram</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="weeklyTips()">
+                <span><span class="emoji">💌</span>Weekly Tips</span>
+                <span>›</span>
+            </button>
+        </div>
+    `);
+}
+
+function showPeachyTips() {
+    addMessage("You're entering your soft girl era with your two besties - a dreamy blush and a peachy lipstick.<br><br>");
+    addMessage("😊 <strong>Apply a soft blush on your cheekbones</strong> and across the bridge of the nose for that playful, golden hour glow.<br><br>");
+    addMessage("👄 <strong>Swipe across a lipstick in peach or rose</strong>, then press a lip gloss in the centre for a naturally fuller, plump look.<br><br>");
+    addMessage(`<strong>Here are BeBe picks curated for you:</strong><br>
+        <a href="https://www.nykaa.com/elle-18-blushbomb/p/13165225" class="product-link" target="_blank">🌸 Elle18 Blushbomb</a><br>
+        <a href="https://www.nykaa.com/lakme-facelift-multislayer-blush-stick/p/14332937" class="product-link" target="_blank">🌸 Lakme Blush Stick</a><br>
+        <a href="https://www.nykaa.com/lakme-glitterati-glaze-lip-gloss/p/16962454" class="product-link" target="_blank">💋 Lakme Lip Glaze</a><br><br>
+        Great pick!💯 Hope that hits the spot.<br><br>
+        <a href="https://www.instagram.com/p/DNaTuouyH3N/?img_index=1" class="content-link" target="_blank">📱 Blush Placement Tutorial</a>
+        <div class="message-buttons" style="margin-top: 15px;">
+            <button class="chat-button" onclick="goToMainMenu()">
+                <span><span class="emoji">🔁</span>Main Menu</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="visitInstagram()">
+                <span><span class="emoji">📱</span>Visit Our Instagram</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="weeklyTips()">
+                <span><span class="emoji">💌</span>Weekly Tips</span>
+                <span>›</span>
+            </button>
+        </div>
+    `);
+}
+
+function showDewyTips() {
+    addMessage("You said 'I do' to a dewy look that deserves a spotlight and a spot on your gram.✨<br><br>");
+    addMessage("🥰 <strong>Smoothen out your skin with a glowy primer</strong> and even out with a skin tint for that extra glow you deserve.<br><br>");
+    addMessage("🥰 <strong>If you're running late, use that concealer smart:</strong> lift the outer eye, sharpen lip edges for a crisp cupid's bow, and tidy any wobbly liner in one swipe for drama that holds.<br><br>");
+    addMessage(`<strong>Here are BeBe picks curated for you:</strong><br>
+        <a href="https://www.nykaa.com/lakme-makeup-skincare-vitamin-c-superglow-skin-perfecting-primer/p/15711586" class="product-link" target="_blank">✨ Lakme Vit C Superglow Primer</a><br>
+        <a href="https://www.nykaa.com/lakme-vit-c-face-ivory-combo-tint-compact/p/16415794" class="product-link" target="_blank">✨ Lakme Vit C Tint</a><br>
+        <a href="https://www.nykaa.com/lakme-vit-c-concealer-with-setting-spray-combo/p/16415796" class="product-link" target="_blank">✨ Lakme Vit C Concealer Set</a><br><br>
+        Amazing!🥰 Hope that hits the spot.<br><br>
+        <a href="https://www.instagram.com/p/DCT9H-MKjRE/?img_index=1" class="content-link" target="_blank">📱 Smart Concealer Tutorial</a>
+        <div class="message-buttons" style="margin-top: 15px;">
+            <button class="chat-button" onclick="goToMainMenu()">
+                <span><span class="emoji">🔁</span>Main Menu</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="visitInstagram()">
+                <span><span class="emoji">📱</span>Visit Our Instagram</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="weeklyTips()">
+                <span><span class="emoji">💌</span>Weekly Tips</span>
+                <span>›</span>
+            </button>
+        </div>
+    `);
+}
+
+function showEdgyTips() {
+    addMessage("Get ready to step into your main character energy and serve fierce eye drama all night.😸<br><br>");
+    addMessage("<strong>Define the inner corners with a bold liquid eyeliner</strong> and sketch the wing for drama and depth.<br><br>");
+    addMessage("<strong>Lift up with a lash volumizer mascara</strong> to make your eyes pop in the best way possible.<br><br>");
+    addMessage(`<strong>Here are BeBe picks curated for you:</strong><br>
+        <a href="https://www.nykaa.com/lakme-wink-and-win-combo-slash-save-hp2021/p/1356733" class="product-link" target="_blank">👁️ Lakme Eyeconic Combo</a><br>
+        <a href="https://www.nykaa.com/elle-18-dreamy-eye-combo/p/13163840" class="product-link" target="_blank">👁️ Elle18 Dreamy Eye Combo</a><br><br>
+        Love this selection!🥰 Hope that hits the spot.<br><br>
+        <a href="https://www.instagram.com/p/DKtyFb4yRSd/?img_index=7" class="content-link" target="_blank">📱 Sharp Wing Tutorial</a>
+        <div class="message-buttons" style="margin-top: 15px;">
+            <button class="chat-button" onclick="goToMainMenu()">
+                <span><span class="emoji">🔁</span>Main Menu</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="visitInstagram()">
+                <span><span class="emoji">📱</span>Visit Our Instagram</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="weeklyTips()">
+                <span><span class="emoji">💌</span>Weekly Tips</span>
+                <span>›</span>
+            </button>
+        </div>
+    `);
+}
+
+function startSunscreenJourney() {
+    const sunscreenIntro = `
+        We've learnt that the right sunscreen isn't hard to find, most of us are just looking at the wrong place. Let's find one that works for you 🌟<br><br>
+        <strong>Tell me your skin type and I'll match textures that feel good and protect:</strong>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="selectSkinType('combination')">
+                <span><span class="emoji">🌓</span>Combination</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectSkinType('normal')">
+                <span><span class="emoji">😊</span>Normal</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectSkinType('dry')">
+                <span><span class="emoji">🏜️</span>Dry</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectSkinType('oily')">
+                <span><span class="emoji">💧</span>Oily</span>
+                <span>›</span>
+            </button>
+        </div>
+        
+        <div class="privacy-notice">
+            For your reference, you can review <a href="https://www.hul.co.in/brands/" target="_blank">Unilever trusted brands</a> and <a href="https://www.unilevernotices.com/privacy-notices/india-english.html" target="_blank">Privacy notice</a> to learn more about how we handle your data and ensure your privacy.
+        </div>
+    `;
+    addMessage(sunscreenIntro);
+}
+
+async function selectSkinType(skinType) {
+    const skinTypeNames = {
+        'combination': '🌓 Combination',
+        'normal': '😊 Normal', 
+        'dry': '🏜️ Dry',
+        'oily': '💧 Oily'
+    };
+    
+    addMessage(`${skinTypeNames[skinType]} Skin`, true);
+    await showTyping();
+    
+    switch(skinType) {
+        case 'combination':
+            showCombinationSkincare();
+            break;
+        case 'normal':
+            showNormalSkincare();
+            break;
+        case 'dry':
+            showDrySkincare();
+            break;
+        case 'oily':
+            showOilySkincare();
+            break;
+    }
+}
+
+function showCombinationSkincare() {
+    const advice = `
+        Combination skin means your T-zone (forehead, nose, chin) gets oily while your cheeks feel normal or a bit dry. Achieving balanced skin is the key for you.🤗<br><br>
+        <strong>A light gel suits the T-zone</strong> so it doesn't look shiny, and a gel-cream suits the cheeks so they stay comfortable.<br><br>
+        <strong>Time to find a sunscreen your skin will love! Hot Takes by BeBeautiful recommends three sunscreens for your skin type:</strong>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="selectProduct('pond-spf55')">
+                <span><span class="emoji">🧴</span>POND'S Sun Miracle SPF 55 PA+++</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectProduct('lakme-gel')">
+                <span><span class="emoji">🧴</span>Lakme Sun Expert Gel Sunscreen</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectProduct('lakme-hyaluronic')">
+                <span><span class="emoji">🧴</span>Lakme 5% Hyaluronic Sun Gel</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(advice);
+}
+
+function showNormalSkincare() {
+    const advice = `
+        Normal skin stays balanced most of the day. Keep it that way with broad-spectrum SPF 50 that feels light, sets fast, and sits clean under makeup.<br><br>
+        <strong>A light lotion for daily use or a tinted SPF works well;</strong> stick to non-comedogenic formulas so pores stay calm.<br><br>
+        <strong>Time to find a sunscreen your skin will love! Hot Takes by BeBeautiful recommends three sunscreens for your skin type:</strong>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="selectProduct('pond-spf55')">
+                <span><span class="emoji">🧴</span>POND'S Sun Miracle SPF 55 PA+++</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectProduct('lakme-priming')">
+                <span><span class="emoji">🧴</span>Lakmé Sun Expert Priming Dry Touch</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectProduct('novology-tinted')">
+                <span><span class="emoji">🧴</span>Novology Tinted Sunscreen</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(advice);
+}
+
+function showDrySkincare() {
+    const advice = `
+        Dry skin means your skin doesn't make enough natural oil which weakens the surface barrier. It becomes tight after cleansing, rough or flaky in places, and rarely shiny.<br><br>
+        <strong>You will need a broad-spectrum SPF 50 that feels silky,</strong> settles fast, and sits well under makeup. A rich-but-breathable formula that hydrates as it protects with skin barrier helpers like ceramides will work for you.<br><br>
+        <strong>Time to find a sunscreen your skin will love! Hot Takes by BeBeautiful recommends sunscreens for your skin type:</strong>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="selectProduct('simple-hydrating')">
+                <span><span class="emoji">🧴</span>Simple Hydrating UV Fluid SPF 50</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectProduct('novology-hydrating')">
+                <span><span class="emoji">🧴</span>Novology Hydrating Sheer Sunscreen</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectProduct('lakme-hyaluronic')">
+                <span><span class="emoji">🧴</span>Lakmé 5% Hyaluronic Sun Gel</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(advice);
+}
+
+function showOilySkincare() {
+    const advice = `
+        Oily skin makes more natural oil (sebum), so the face looks shiny, especially on the forehead, nose, and chin. It may feel fresh right after cleansing but turns greasy again by midday.<br><br>
+        <strong>Choose water-light gels, gel-creams, or fluid lotions</strong> that set matte and light on skin. Skip heavy cream textures as they can feel greasy and make makeup move.<br><br>
+        <strong>Time to find a sunscreen your skin will love! Hot Takes by BeBeautiful recommends three sunscreens for your skin type:</strong>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="selectProduct('simple-mattifying')">
+                <span><span class="emoji">🧴</span>Simple Mattifying UV Fluid SPF 50</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectProduct('novology-ultra-light')">
+                <span><span class="emoji">🧴</span>Novology Ultra Light Gel Sunscreen</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectProduct('lakme-matte')">
+                <span><span class="emoji">🧴</span>Lakmé Dry Matte Fluid</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(advice);
+}
+
+async function selectProduct(productId) {
+    const products = {
+        'pond-spf55': {
+            name: "🧴 POND'S Sun Miracle SPF 55 PA+++",
+            description: "Love that choice!👌This light SPF 55 PA+++ suits combination skin because it sinks in fast, keeps the T-zone fresh, and gives the cheeks comfortable moisture. You get a clean, non-greasy finish with a soft brightness that sits well under makeup and keeps your skin hydrated through the day.",
+            link: "https://www.nykaa.com/ponds-serum-boost-sunscreen-cream-spf-55/p/9897345"
+        },
+        'lakme-gel': {
+            name: "🧴 Lakme Sun Expert Gel Sunscreen",
+            description: "Amazing!💯This is a water-light gel and made for combination skin. The gel texture with niacinamide absorbs fast, feels non-sticky, and leaves no white cast, so your T-zone stays fresh while cheeks feel comfortable.",
+            link: "https://www.nykaa.com/lakme-sun-expert-spf-50-pa-ultra-matte-lotion-sunscreen-188813/p/188813"
+        },
+        'simple-mattifying': {
+            name: "🧴 Simple Mattifying UV Fluid SPF 50",
+            description: "Love that choice!👌This ultra-light fluid is made for oily, sensitive skin; niacinamide helps keep shine in check while supporting the skin barrier. It absorbs fast, feels clean and non-sticky, is non-comedogenic.",
+            link: "https://www.nykaa.com/simple-mattifying-uv-fluid-spf-50-pa/p/20643085"
+        }
+    };
+    
+    const product = products[productId] || products['pond-spf55'];
+    addMessage(product.name, true);
+    await showTyping();
+    
+    const productInfo = `
+        ${product.description}<br><br>
+        <a href="${product.link}" class="product-link" target="_blank">🛒 Add to your routine!</a><br><br>
+        <a href="https://www.youtube.com/shorts/tISbf8Q60_Y" class="content-link" target="_blank">📱 Watch Expert Tutorial</a><br><br>
+        
+        Hope that helped cut through the sunscreen confusion! ✨<br>
+        BeBeautiful is your go-to for real beauty expertise - no fluff, just honest advice that works.<br><br>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="learnApplication()">
+                <span><span class="emoji">💯</span>Learn Application Tips</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="goToMainMenu()">
+                <span><span class="emoji">🔁</span>Go to Main Menu</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="visitInstagram()">
+                <span><span class="emoji">💌</span>Visit Our Instagram</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(productInfo);
+}
+
+async function learnApplication() {
+    addMessage('💯 Yes, I\'d love to!', true);
+    await showTyping();
+    
+    const applicationTips = `
+        Let's make sunscreen application easy with the exact amount, the right timing, and a makeup-safe reapply:<br><br>
+        
+        <strong>Step 1:</strong> After your moisturiser has sunk in, take two fingers' worth of sunscreen.<br><br>
+        <strong>Step 2:</strong> Apply it evenly over your face, ears, and neck.<br><br>
+        <strong>Step 3:</strong> Massage it gently until it looks even and no white patches remain.<br><br>
+        <strong>Step 4:</strong> If you're outdoors, reapply every 2–3 hours.<br><br>
+        <strong>Step 5:</strong> Wearing makeup? Use a sunstick so your base stays neat.<br><br>
+        
+        <a href="https://www.youtube.com/watch?v=spVC81shY4g" class="content-link" target="_blank">📱 Watch Dr. Anchal Pant's Expert Tips</a><br><br>
+        <a href="https://www.bebeautiful.in/all-things-skin/everyday/how-to-apply-sunscreen-on-face" class="content-link" target="_blank">📖 Read Complete Guide</a>
+        
+        <div class="message-buttons" style="margin-top: 15px;">
+            <button class="chat-button" onclick="goToMainMenu()">
+                <span><span class="emoji">🔁</span>Main Menu</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="visitInstagram()">
+                <span><span class="emoji">💌</span>Visit Our Instagram</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(applicationTips);
+}
+
+function startRoutineJourney() {
+    const routineIntro = `
+        Hi Beautiful! Let's make beauty effortless and precise for you. 💫<br><br>
+        I'll build a routine that fits your life with easy, effective steps that actually work.<br><br>
+        <strong>Your Beauty Routine:</strong>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="selectRoutineType('skincare')">
+                <span><span class="emoji">🧴</span>Skincare Routine</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectRoutineType('haircare')">
+                <span><span class="emoji">💇‍♀️</span>Haircare Routine</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectRoutineType('wellness')">
+                <span><span class="emoji">🧘‍♀️</span>Wellness Tips/Self-Care</span>
+                <span>›</span>
+            </button>
+        </div>
+        
+        <div class="privacy-notice">
+            For your reference, you can review <a href="https://www.hul.co.in/brands/" target="_blank">Unilever trusted brands</a> and <a href="https://www.unilevernotices.com/privacy-notices/india-english.html" target="_blank">Privacy notice</a> to learn more about how we handle your data and ensure your privacy.
+        </div>
+    `;
+    addMessage(routineIntro);
+}
+
+async function selectRoutineType(type) {
+    const typeNames = {
+        'skincare': '🧴 Skincare Routine',
+        'haircare': '💇‍♀️ Haircare Routine',
+        'wellness': '🧘‍♀️ Wellness Tips/Self-Care'
+    };
+    
+    addMessage(typeNames[type], true);
+    await showTyping();
+    
+    if (type === 'skincare') {
+        showSkincareRoutine();
+    } else if (type === 'haircare') {
+        showHaircareRoutine();
+    } else {
+        showWellnessTips();
+    }
+}
+
+function showSkincareRoutine() {
+    const routine = `
+        Let's build your perfect skincare routine! 🌟<br><br>
+        <strong>Let us know your skin type:</strong>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="selectRoutineSkinType('combination')">
+                <span><span class="emoji">🌓</span>Combination Skin</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectRoutineSkinType('normal')">
+                <span><span class="emoji">😊</span>Normal Skin</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectRoutineSkinType('dry')">
+                <span><span class="emoji">🏜️</span>Dry Skin</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectRoutineSkinType('oily')">
+                <span><span class="emoji">💧</span>Oily Skin</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="learnSkinTypes()">
+                <span><span class="emoji">❓</span>Confused? Learn about Skin Types</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(routine);
+}
+
+async function learnSkinTypes() {
+    addMessage('❓ Learn about Skin Types', true);
+    await showTyping();
+    
+    const skinTypeGuide = `
+        No worries, here's how you can understand your skin type:<br><br>
+        
+        <strong>Combination</strong> - T-zone feels oily by midday while cheeks feel comfortable or even a bit dry.<br><br>
+        <strong>Normal</strong> - Skin feels balanced and comfortable throughout the day—not too oily, not too tight.<br><br>
+        <strong>Dry</strong> - Skin often feels tight, especially after cleansing, and craves that extra moisture boost.<br><br>
+        <strong>Oily</strong> - Skin feels shiny and produces oil quickly, especially in your T-zone area.<br><br>
+        
+        <strong>Now choose your skin type:</strong>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="selectRoutineSkinType('combination')">
+                <span><span class="emoji">🌓</span>Combination Skin</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectRoutineSkinType('normal')">
+                <span><span class="emoji">😊</span>Normal Skin</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectRoutineSkinType('dry')">
+                <span><span class="emoji">🏜️</span>Dry Skin</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectRoutineSkinType('oily')">
+                <span><span class="emoji">💧</span>Oily Skin</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(skinTypeGuide);
+}
+
+async function selectRoutineSkinType(skinType) {
+    const skinTypeNames = {
+        'combination': '🌓 Combination Skin',
+        'normal': '😊 Normal Skin',
+        'dry': '🏜️ Dry Skin',
+        'oily': '💧 Oily Skin'
+    };
+    
+    addMessage(skinTypeNames[skinType], true);
+    await showTyping();
+    
+    const routineSteps = `
+        Perfect! Here's your personalized skincare routine: ✨<br><br>
+        
+        <strong>Step 1 - Cleanse:</strong> Use a gentle cleanser suitable for ${skinTypeNames[skinType].toLowerCase()}<br><br>
+        <strong>Step 2 - Moisturize:</strong> Apply a lightweight moisturizer<br><br>
+        <strong>Step 3 - Treat (Serum):</strong> Use serums with ingredients that target your specific needs<br><br>
+        <strong>Step 4 - Protect (Sunscreen):</strong> Always finish with SPF during the day<br><br>
+        
+        <strong>BeBe Picks for You!</strong><br>
+        🧴 Simple Kind to Skin Refreshing Face Wash<br>
+        🧴 Pond's Super Light Gel<br>
+        🧴 Lakmé Sun Expert Ultra Matte Gel SPF 50<br><br>
+        
+        Hot Takes by BeBeautiful keeps it simple with beauty insider tips and matched products in one place.<br><br>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="goToMainMenu()">
+                <span><span class="emoji">🔁</span>Main Menu</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="visitInstagram()">
+                <span><span class="emoji">💌</span>Visit Our Instagram</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="weeklyTips()">
+                <span><span class="emoji">📫</span>Weekly Tips</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(routineSteps);
+}
+
+function showHaircareRoutine() {
+    const routine = `
+        Let's create your perfect haircare routine! 💇‍♀️<br><br>
+        <strong>What's your hair type?</strong>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="selectHairType('straight')">
+                <span><span class="emoji">➰</span>Straight</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectHairType('curly')">
+                <span><span class="emoji">🌀</span>Curly</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectHairType('wavy')">
+                <span><span class="emoji">〰️</span>Wavy</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectHairType('coily')">
+                <span><span class="emoji">🔃</span>Coily</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(routine);
+}
+
+async function selectHairType(hairType) {
+    const hairTypes = {
+        'straight': '➰ Straight Hair',
+        'curly': '🌀 Curly Hair', 
+        'wavy': '〰️ Wavy Hair',
+        'coily': '🔃 Coily Hair'
+    };
+    
+    addMessage(hairTypes[hairType], true);
+    await showTyping();
+    
+    const routine = `
+        Great! Here's your step-wise haircare routine for ${hairTypes[hairType].toLowerCase()}: 💫<br><br>
+        
+        <strong>Step 1 - Cleanse (Shampoo):</strong> Use a gentle shampoo suited for your hair type<br><br>
+        <strong>Step 2 - Nourish (Conditioner OR Mask):</strong> Deep condition to keep hair healthy<br><br>
+        <strong>Step 3 - Protect or Treat (Scalp or Hair Serum):</strong> Use treatments for specific needs<br><br>
+        <strong>Step 4 - Style:</strong> Use heat protectants and styling products as needed<br><br>
+        
+        Hot Takes by BeBeautiful keeps it simple with beauty insider tips and matched products in one place.<br><br>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="goToMainMenu()">
+                <span><span class="emoji">🔁</span>Main Menu</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="visitInstagram()">
+                <span><span class="emoji">💌</span>Visit Our Instagram</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="weeklyTips()">
+                <span><span class="emoji">📫</span>Weekly Tips</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(routine);
+}
+
+function showWellnessTips() {
+    const wellness = `
+        Let's talk self-care! 🧘‍♀️✨<br><br>
+        <strong>What feels like self-care to you?</strong>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="selectWellnessType('skincare')">
+                <span><span class="emoji">🧴</span>Skincare Rituals</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectWellnessType('hair')">
+                <span><span class="emoji">💇‍♀️</span>Hair Rituals</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectWellnessType('relaxation')">
+                <span><span class="emoji">🛁</span>Relaxing Me-time</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(wellness);
+}
+
+async function selectWellnessType(type) {
+    const types = {
+        'skincare': '🧴 Skincare Rituals',
+        'hair': '💇‍♀️ Hair Rituals',
+        'relaxation': '🛁 Relaxing Me-time'
+    };
+    
+    addMessage(types[type], true);
+    await showTyping();
+    
+    const tips = {
+        'skincare': {
+            tip1: "Create a calming evening skincare ritual with gentle cleansing and moisturizing.",
+            tip2: "Try face masks on weekends for a spa-like experience at home."
+        },
+        'hair': {
+            tip1: "Give yourself a scalp massage with oils to relax and promote healthy hair growth.", 
+            tip2: "Try overnight hair treatments for deep nourishment while you sleep."
+        },
+        'relaxation': {
+            tip1: "Take warm baths with essential oils to unwind after stressful days.",
+            tip2: "Practice 10 minutes of meditation or deep breathing for mental clarity."
+        }
+    };
+    
+    const wellnessTips = tips[type];
+    
+    const response = `
+        Love this choice! 💫<br><br>
+        <strong>Wellness Tip 1:</strong> ${wellnessTips.tip1}<br><br>
+        <strong>Wellness Tip 2:</strong> ${wellnessTips.tip2}<br><br>
+        
+        Remember, self-care is about consistency, not perfection. Find what works for you! 🌟<br><br>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="goToMainMenu()">
+                <span><span class="emoji">🔁</span>Main Menu</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="visitInstagram()">
+                <span><span class="emoji">💌</span>Visit Our Instagram</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="weeklyTips()">
+                <span><span class="emoji">📫</span>Weekly Tips</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(response);
+}
+
+function startTrendsJourney() {
+    const trendsIntro = `
+        🔥 Welcome to BeBe Verified Trends! <br><br>
+        We're your filter for what's actually worth trying. No hype, just honest takes on beauty trends that work in real life.<br><br>
+        
+        <strong>What would you like to explore?</strong>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="exploreIngredients()">
+                <span><span class="emoji">🧪</span>Trending Ingredients</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="exploreTechniques()">
+                <span><span class="emoji">✨</span>Makeup Techniques</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="exploreProducts()">
+                <span><span class="emoji">🛍️</span>Product Recommendations</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="goToMainMenu()">
+                <span><span class="emoji">🔄</span>Back to Main Menu</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(trendsIntro);
+}
+
+async function exploreIngredients() {
+    addMessage('🧪 Trending Ingredients', true);
+    await showTyping();
+    
+    const ingredients = `
+        Here are the ingredients that are actually worth the hype: 🧪✨<br><br>
+        
+        <strong>🌟 Niacinamide:</strong> Controls oil, minimizes pores, and evens skin tone<br><br>
+        <strong>🌟 Hyaluronic Acid:</strong> Intense hydration that plumps and smooths<br><br>
+        <strong>🌟 Vitamin C:</strong> Brightens skin and protects against environmental damage<br><br>
+        <strong>🌟 Retinol:</strong> The gold standard for anti-aging and skin renewal<br><br>
+        
+        Want specific product recommendations with these ingredients?<br><br>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="goToMainMenu()">
+                <span><span class="emoji">🔁</span>Main Menu</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="visitInstagram()">
+                <span><span class="emoji">💌</span>Visit Our Instagram</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="weeklyTips()">
+                <span><span class="emoji">📫</span>Weekly Tips</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(ingredients);
+}
+
+async function exploreTechniques() {
+    addMessage('✨ Makeup Techniques', true);
+    await showTyping();
+    
+    const techniques = `
+        Hot makeup techniques that actually work: ✨<br><br>
+        
+        <strong>🎨 Color Correcting:</strong> Use opposite colors on the color wheel to neutralize imperfections<br><br>
+        <strong>🎨 Cream Before Powder:</strong> Layer cream blush under powder for longer-lasting color<br><br>
+        <strong>🎨 Reverse Cat Eye:</strong> Line the lower lash line for a modern, fresh look<br><br>
+        <strong>🎨 Lip Liner All Over:</strong> Use lip liner as lipstick for matte, long-lasting color<br><br>
+        
+        <a href="https://www.instagram.com/BeBeautiful_India" class="content-link" target="_blank">📱 Watch Tutorials on Instagram</a><br><br>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="goToMainMenu()">
+                <span><span class="emoji">🔁</span>Main Menu</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="visitInstagram()">
+                <span><span class="emoji">💌</span>Visit Our Instagram</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="weeklyTips()">
+                <span><span class="emoji">📫</span>Weekly Tips</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(techniques);
+}
+
+async function exploreProducts() {
+    addMessage('🛍️ Product Recommendations', true);
+    await showTyping();
+    
+    const products = `
+        BeBe-approved products that are worth your money: 🛍️✨<br><br>
+        
+        <strong>Face:</strong><br>
+        🧴 Lakme 9to5 Naturale Foundation<br>
+        🧴 Simple Kind to Skin Moisturizer<br>
+        🧴 Pond's Super Light Gel<br><br>
+        
+        <strong>Eyes:</strong><br>
+        👁️ Lakme Eyeconic Kajal<br>
+        👁️ Elle18 Color Pops Eyeshadow<br><br>
+        
+        <strong>Lips:</strong><br>
+        💋 Lakme 9to5 Primer + Matte Lipstick<br>
+        💋 Elle18 Color Pops Lipstick<br><br>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="goToMainMenu()">
+                <span><span class="emoji">🔁</span>Main Menu</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="visitInstagram()">
+                <span><span class="emoji">💌</span>Visit Our Instagram</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="weeklyTips()">
+                <span><span class="emoji">📫</span>Weekly Tips</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(products);
+}
+
+async function goToMainMenu() {
+    addMessage('🔁 Main Menu', true);
+    await showTyping();
+    
+    const mainMenu = `
+        💬 <strong>Where should we begin? Pick a path to start.</strong>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="selectOption('sunscreen')">
+                <span><span class="emoji">🌞</span>Sunscreen for My Skin</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectOption('routine')">
+                <span><span class="emoji">🧴</span>My Beauty Routine</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectOption('trends')">
+                <span><span class="emoji">🔥</span>BeBe Verified Trends</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="selectOption('makeup')">
+                <span><span class="emoji">💄</span>Makeup Hacked! By BeBe</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(mainMenu);
+}
+
+async function visitInstagram() {
+    addMessage('📱 Visit Our Instagram', true);
+    await showTyping();
+    
+    const instagram = `
+        That's a wrap (for now)! 🎬<br><br>
+        📲 <strong>Follow us on @BeBeautiful_India</strong> - we're giving away beauty products every month 🎁<br><br>
+        💻 You can read more expert backed beauty insider scoop on our blog.<br><br>
+        💌 Type "Hi BeBeautiful" if you have any more questions!<br><br>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="weeklyTips()">
+                <span><span class="emoji">📫</span>Weekly Tips</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="goToMainMenu()">
+                <span><span class="emoji">🔄</span>Return to Main Menu</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(instagram);
+}
+
+async function weeklyTips() {
+    addMessage('📫 Weekly Tips', true);
+    await showTyping();
+    
+    const weekly = `
+        Perfect! 💌 <strong>You're all set.</strong><br><br>
+        Hot Takes by BeBeautiful will drop a weekly edit for skincare, wellness, and trends that matter. Want to explore more or wrap for now?<br><br>
+        
+        <div class="message-buttons">
+            <button class="chat-button" onclick="goToMainMenu()">
+                <span><span class="emoji">🔁</span>Main Menu</span>
+                <span>›</span>
+            </button>
+            <button class="chat-button" onclick="visitInstagram()">
+                <span><span class="emoji">🙏</span>End Chat</span>
+                <span>›</span>
+            </button>
+        </div>
+    `;
+    addMessage(weekly);
+}
+
+        // Initialize the chat
+        document.addEventListener('DOMContentLoaded', function() {
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
         });
     </script>
 </body>
